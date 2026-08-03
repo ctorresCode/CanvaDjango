@@ -1,0 +1,14 @@
+{%extends 'base.html'%} {%load static%} {%block extra_css%}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/curso_confirm_delete.css' %}"
+/>
+{%endblock%} {%block content%}
+<h3>¿Estás seguro de que quieres eliminar este curso?</h3>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Eliminar</button>
+  <a href="{% url 'curso_list' %}">Cancelar</a>
+  {%endblock%}
+</form>

@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {%load static%} {%block extra_css%}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/curso_form.css' %}"
+/>
+{%endblock%} {% block content %}
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Crear Materia</button>
+</form>
+{% endblock %}

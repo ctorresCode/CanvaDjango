@@ -1,6 +1,6 @@
 from django.http import request
 from django.shortcuts import redirect, render
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, RedirectView, TemplateView
 from usuarios.forms import RegistrarUsuarioForm
@@ -64,5 +64,9 @@ class PanelMaestroView(EsProfesorMixin, TemplateView):
 
 class InvitadoView(TemplateView):
     template_name = 'usuario/invitado.html'
+
+def cerrar_sesion(request):
+    logout(request)
+    return redirect('Invitado')  
 
    
