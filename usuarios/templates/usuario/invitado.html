@@ -1,0 +1,27 @@
+{%load static%}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invitado</title>
+    <link rel="stylesheet" href="{% static 'usuario/css/invitados.css' %}" />
+  </head>
+  <body>
+    <section class="hero-espectacular">
+      <div class="hero-contenido">
+        <h1>Tu Futuro Empieza Aquí</h1>
+        <p>
+          Únete a nuestra plataforma educativa y lleva tu aprendizaje al
+          siguiente nivel.
+        </p>
+        <div class="botones-hero">
+          <a href="{% url 'login' %}" class="btn-primario">Iniciar Sesión</a>
+          <a href="{% url 'registro_usuario' %}" class="btn-secundario"
+            >Regístrate Gratis</a
+          >
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

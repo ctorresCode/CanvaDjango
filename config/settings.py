@@ -78,8 +78,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'mssql',
+        'NAME': 'canvas',
+        'HOST':'DESKTOP-737K9UP',
+        'PORT':'',
+        'OPTIONS':{
+            'driver': 'ODBC Driver 17 for SQL Server',
+        }
     }
 }
 
@@ -119,6 +124,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -126,3 +137,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'usuarios.Usuario'
+
+LOGIN_REDIRECT_URL = 'despachador_roles'
+LOGIN_URL = 'login'
+LOGOUT_REDIRECT_URL = 'login'
