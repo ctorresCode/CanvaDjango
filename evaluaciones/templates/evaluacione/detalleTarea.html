@@ -1,0 +1,29 @@
+{% extends 'baseMaestros.html' %} {% load static %} {% block extra_css %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'evaluacione/css/detalleTareas.css' %}"
+/>
+{% endblock %} {% block content %}
+<div class="tarea-detalle-container">
+  <h1 class="tarea-titulo">{{ tarea.titulo }}</h1>
+  <hr class="tarea-hr" />
+  <div class="tarea-detalle">
+    <p><strong>Fecha de entrega:</strong> {{ tarea.Fecha_entrega }}</p>
+    <p><strong>Puntos:</strong> {{ tarea.cantidad_puntos }}</p>
+    <p><strong>Curso:</strong> {{ tarea.curso }}</p>
+  </div>
+  <hr class="tarea-hr" />
+  <div class="tarea-descripcion-container">
+    <p class="tarea-descripcion">{{ tarea.descripcion }}</p>
+  </div>
+
+  <div class="back-container">
+    <hr class="hr-back" />
+    <a href="{% url 'lista_de_tareas' %}" class="back-link"
+      >Volver a la lista de tareas</a
+    >
+  </div>
+
+  {%endblock%}
+</div>

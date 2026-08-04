@@ -1,0 +1,97 @@
+.contenedor-formulario {
+  max-width: 800px;
+  margin: 40px auto;
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eaeaea;
+}
+
+.titulo-formulario {
+  color: #333;
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  margin-top: 0;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 15px;
+}
+
+.formulario-tarea p {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 22px;
+}
+
+.formulario-tarea label {
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.formulario-tarea input[type="text"],
+.formulario-tarea input[type="number"],
+.formulario-tarea input[type="datetime-local"],
+.formulario-tarea select,
+.formulario-tarea textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+  background-color: #fcfcfc;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.formulario-tarea textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.formulario-tarea input[type="file"] {
+  padding: 10px 0;
+  font-size: 0.95rem;
+  color: #666;
+}
+
+.formulario-tarea input:focus,
+.formulario-tarea select:focus,
+.formulario-tarea textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  background-color: #ffffff;
+}
+
+.acciones-formulario {
+  margin-top: 35px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-guardar {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.1s ease;
+}
+
+.btn-guardar:hover {
+  background-color: #2563eb;
+}
+
+.btn-guardar:active {
+  transform: scale(0.98);
+}

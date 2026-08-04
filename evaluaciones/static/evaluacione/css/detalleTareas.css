@@ -1,0 +1,43 @@
+.tarea-detalle {
+  display: flex;
+  gap: 40px;
+  font-size: 16px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.tarea-detalle-container {
+  margin-top: 30px;
+}
+
+.tarea-hr {
+  margin-top: 10px;
+}
+
+.tarea-descripcion-container {
+  margin-top: 10px;
+}
+
+.back-container {
+  margin-top: 30px;
+}
+
+.back-link {
+  background-color: #000000;
+  color: #ffffff;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  background-color: #27272a;
+  transform: translateY(-2px);
+  cursor: pointer;
+}

@@ -1,0 +1,19 @@
+{% extends 'baseMaestros.html' %} {% load static %} {% block extra_css %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'evaluacione/css/CrearTareas.css' %}"
+/>
+{% endblock %} {% block content %}
+<div class="contenedor-formulario">
+  <h1 class="titulo-formulario">Crear Nueva Tarea</h1>
+
+  <form method="POST" enctype="multipart/form-data" class="formulario-tarea">
+    {% csrf_token %} {{ form.as_p }}
+
+    <div class="acciones-formulario">
+      <button type="submit" class="btn-guardar">Crear tarea</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

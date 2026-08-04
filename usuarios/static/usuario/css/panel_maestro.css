@@ -297,8 +297,9 @@ body {
 }
 /* Main */
 main {
-  padding: 2rem 3rem 3rem 17rem;
-  transition: padding 0.5s ease;
+  margin-left: 15rem;
+  padding: 2rem 4rem;
+  transition: 0.5s;
 }
 main h1 {
   color: var(--color-text-primary);

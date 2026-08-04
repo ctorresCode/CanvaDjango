@@ -1,0 +1,12 @@
+{% extends 'baseMaestros.html' %} {% load static %} {% block extra_css %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'evaluacione/css/editarTareas.css' %}"
+/>
+{% endblock %} {% block content %}
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Guardar cambios</button>
+</form>
+{% endblock %}

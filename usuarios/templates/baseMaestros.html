@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Panel Estudiante</title>
+    <title>Panel Maestro</title>
     <link
       rel="stylesheet"
       href="{% static 'usuario/css/panel_estudiante.css' %}"
@@ -58,7 +58,7 @@
             </a>
           </li>
           <li class="menu-item menu-item-static">
-            <a href="#" class="menu-link">
+            <a href="{% url 'lista_de_tareas' %}" class="menu-link">
               <i class="bx bx-task"></i>
               <span>Tareas</span>
             </a>
