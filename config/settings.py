@@ -141,3 +141,4 @@ AUTH_USER_MODEL = 'usuarios.Usuario'
 LOGIN_REDIRECT_URL = 'despachador_roles'
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'login'
+

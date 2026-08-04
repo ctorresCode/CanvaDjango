@@ -1,0 +1,196 @@
+/* ==========================================
+   FONDOS Y CONTENEDORES
+   ========================================== */
+body {
+  margin: 0;
+  padding: 0;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Mantenemos la atmósfera académica con un overlay oscuro para dar contraste */
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)),
+    url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Un poco más ancho que el login para acomodar mejor los campos de registro */
+.register-wrapper {
+  width: 100%;
+  max-width: 500px;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+}
+
+.register-card {
+  background-color: #ffffff;
+  border-radius: 24px;
+  padding: 3.5rem 3rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ==========================================
+   ENCABEZADO E ICONOGRAFÍA
+   ========================================== */
+.school-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  color: #0f172a;
+}
+
+.school-icon svg {
+  background-color: #f8fafc;
+  padding: 14px;
+  border-radius: 18px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.register-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.register-header h1 {
+  margin: 0 0 10px 0;
+  font-size: 1.85rem;
+  color: #0f172a;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.register-header p {
+  margin: 0;
+  color: #64748b;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* ==========================================
+   ESTILOS PARA EL FORMULARIO DE DJANGO
+   ========================================== */
+.django-form p {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+  margin-top: 0;
+}
+
+.django-form label {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.django-form input {
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+  background-color: #f8fafc;
+  font-size: 1rem;
+  color: #0f172a;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.django-form input:focus {
+  outline: none;
+  border-color: #0f172a;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(15, 23, 42, 0.1);
+}
+
+/* Estilos UX para textos de ayuda (ej. requisitos de la contraseña) */
+.django-form .helptext {
+  display: block;
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-top: 8px;
+  line-height: 1.4;
+  background-color: #f1f5f9;
+  padding: 10px 12px;
+  border-radius: 8px;
+}
+
+/* Estilos UX para mensajes de error de Django */
+.django-form ul.errorlist {
+  margin: 0 0 10px 0;
+  padding: 10px 14px;
+  background-color: #fef2f2;
+  border-left: 4px solid #ef4444;
+  border-radius: 0 8px 8px 0;
+  list-style-type: none;
+}
+
+.django-form ul.errorlist li {
+  color: #b91c1c;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* ==========================================
+   BOTÓN Y FOOTER
+   ========================================== */
+.btn-primary {
+  width: 100%;
+  padding: 16px;
+  margin-top: 1rem;
+  background-color: #0f172a;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.2);
+}
+
+.btn-primary:hover {
+  background-color: #1e293b;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.register-footer {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.register-footer p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #64748b;
+}
+
+.register-footer a {
+  color: #0f172a;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.register-footer a:hover {
+  color: #3b82f6;
+  text-decoration: underline;
+}

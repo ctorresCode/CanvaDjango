@@ -1,0 +1,152 @@
+/* Reset y Fondo Académico */
+body {
+  margin: 0;
+  padding: 0;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Aquí aplicamos la imagen de fondo con un filtro oscuro encima */
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.85)),
+    url("https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* El contenedor principal */
+.login-wrapper {
+  width: 100%;
+  max-width: 440px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* La tarjeta blanca central */
+.login-card {
+  background-color: #ffffff;
+  border-radius: 24px;
+  padding: 3rem 2.5rem;
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.2),
+    0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Icono del birrete (gorro de graduación) */
+.school-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  color: #0f172a;
+}
+
+.school-icon svg {
+  background-color: #f1f5f9;
+  padding: 12px;
+  border-radius: 16px;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.login-header h1 {
+  margin: 0 0 8px 0;
+  font-size: 1.8rem;
+  color: #0f172a;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.login-header p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+/* ==========================================
+   MAGIA PARA EL FORM DE DJANGO
+   ========================================== */
+
+.django-form p {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+  margin-top: 0;
+}
+
+.django-form label {
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  color: #334155;
+  font-weight: 600;
+}
+
+.django-form input {
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+  background-color: #f8fafc;
+  font-size: 1rem;
+  color: #0f172a;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.django-form input:focus {
+  outline: none;
+  border-color: #0f172a;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(15, 23, 42, 0.1);
+}
+
+.django-form .helptext {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  margin-top: 6px;
+  font-weight: 400;
+}
+
+/* ==========================================
+   BOTÓN DE LOGIN
+   ========================================== */
+
+.btn-login {
+  width: 100%;
+  padding: 14px;
+  margin-top: 0.5rem;
+  background-color: #0f172a; /* Un azul/negro muy oscuro y elegante */
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.2);
+}
+
+.btn-login:hover {
+  background-color: #1e293b;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.3);
+}
+
+.btn-login:active {
+  transform: translateY(0);
+}

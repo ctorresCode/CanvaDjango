@@ -1,11 +1,199 @@
-.curso-item {
-  border: 1px solid #ccc;
+.page-container {
+  padding: 2rem;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  box-sizing: border-box;
 }
 
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 2rem;
-  margin-left: 20px;
+  margin-bottom: 2.5rem;
+  width: 100%;
+}
+
+.button-create {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  padding: 12px 26px;
+  background-color: #000000;
+  color: #ffffff;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.button-create:hover {
+  background-color: #27272a;
+  transform: translateY(-2px);
+}
+
+.curso-container-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.curso-card-wrapper {
+  position: relative;
+  flex: 1 1 320px;
+  max-width: 360px;
+  min-width: 280px;
+}
+
+.curso-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  text-decoration: none;
+  background-color: #ffffff;
+  border: 1px solid #f1f5f9;
+  border-radius: 20px;
+  padding: 2rem 2.5rem 3.5rem 2.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.curso-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px -5px rgba(0, 0, 0, 0.08);
+  border-color: #e2e8f0;
+}
+
+.curso-content {
+  padding-right: 2rem;
+  height: 230px;
+}
+
+.curso-item h3 {
+  margin: 0 0 12px 0;
+  font-size: 1.6rem;
+  color: #0f172a;
+  font-weight: 800;
+}
+
+.curso-item p {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #475569;
+  line-height: 1.6;
+}
+
+.arrow-icon {
+  color: #0f172a;
+  margin-top: 6px;
+  transition: transform 0.2s ease;
+}
+
+.curso-item:hover .arrow-icon {
+  transform: translateX(4px);
+}
+
+.delete-button {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 2rem;
+  color: #0f172a;
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+  z-index: 2;
+}
+
+.edit-button {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 4rem;
+  color: #0f172a;
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+  z-index: 2;
+}
+
+.edit-button:hover {
+  color: #1008e7;
+  transform: scale(1.15);
+}
+
+.delete-button:hover {
+  color: #ef4444;
+  transform: scale(1.15);
+}
+
+/* Empty state */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  min-height: 350px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 20px;
+  text-align: center;
+  color: #64748b;
+  background-color: #f8fafc;
+}
+
+.empty-state svg {
+  margin-bottom: 1rem;
+  color: #94a3b8;
+}
+
+.empty-state p {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.curso-profesor {
+  font-style: italic;
+  font-weight: bold;
+}
+
+@media (max-width: 1100px) {
+  .curso-card-wrapper {
+    flex-basis: calc(50% - 0.75rem);
+    max-width: calc(50% - 0.75rem);
+  }
+}
+
+@media (max-width: 700px) {
+  .curso-card-wrapper {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
 }

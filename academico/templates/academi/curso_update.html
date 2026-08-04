@@ -4,4 +4,11 @@
   type="text/css"
   href="{% static 'css/curso_update.css' %}"
 />
-{%endblock%} {%block content%} {%endblock%}
+{%endblock%} {%block content%}
+<h1>Editar materia</h1>
+<form method="post" class="django-form">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit" class="btn-primary">Guardar cambios</button>
+  <a href="{% url 'curso_list'  %}">Volver</a>
+  {%endblock%}
+</form>

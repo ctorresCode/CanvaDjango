@@ -1,7 +1,10 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
+from academico import models
 from academico.models import Curso
 
 # Create your views here.
@@ -12,10 +15,12 @@ class CursoListView(ListView):
     template_name = 'academi/curso_list.html'
     context_object_name = 'cursos'
 
+
 class CursoDetailView(DetailView):
     model = Curso
     template_name = 'academi/curso_detail.html'
     context_object_name = 'curso'
+
 
 class CursoCreateView(CreateView):
     model = Curso
@@ -27,6 +32,7 @@ class CursoCreateView(CreateView):
         form.instance.maestro = self.request.user.perfil_maestro
         return super().form_valid(form)
 
+
 class CursoUpdateView(UpdateView):
     model = Curso
     template_name = 'academi/curso_update.html'
@@ -37,7 +43,9 @@ class CursoUpdateView(UpdateView):
         form.instance.maestro = self.request.user.perfil_maestro
         return super().form_valid(form)
 
+
 class CursoDeleteView(DeleteView):
     model = Curso
     template_name = 'academi/curso_confirm_delete.html'
     success_url = reverse_lazy('curso_list')
+
