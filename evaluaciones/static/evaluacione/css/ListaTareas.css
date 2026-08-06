@@ -178,3 +178,7 @@
   color: #ef4444;
   transform: scale(1.15);
 }
+
+.titulo_tareasActivas {
+  color: #020000;
+}

@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'usuarios',
     'soporte',
-    'evaluaciones',
+    'evaluaciones.apps.EvaluacionesConfig',
     'academico',
 ]
 

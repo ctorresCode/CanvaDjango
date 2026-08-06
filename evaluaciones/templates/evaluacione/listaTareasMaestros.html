@@ -7,23 +7,31 @@
 {% endblock %} {% block content %}
 <div class="contenedor_tareas">
   <div class="titulo_crearTarea">
-    <h1>Tareas activas para la entrega de los estudiantes</h1>
+    <h1 class="titulo_tareasActivas">
+      Tareas activas para la entrega de los estudiantes
+    </h1>
     <button class="btn-primario" id="btnAbrirModal">+ Crear Nueva Tarea</button>
   </div>
 
   {% for tarea in tareas %}
-  <a href="{% url 'detalle_tarea' tarea.id %}" class="tarea-link">
+  <a
+    href="{% url 'detalle_tarea' tarea.id %}"
+    class="tarea-link"
+    style="text-decoration: none"
+  >
     <div class="tarea">
       <h3 class="materia-nombre">{{tarea.curso}}</h3>
-      <h4 class="tarea-titulo">{{tarea.titulo}}</h4>
+
+      <h4 class="tarea-titulo" style="cursor: pointer">{{tarea.titulo}}</h4>
 
       <div class="tarea_puntos_fecha">
         <p class="tarea-puntos">{{tarea.cantidad_puntos}} puntos</p>
         <p class="tarea-fecha">Fecha de entrega: {{tarea.Fecha_entrega}}</p>
       </div>
 
-      <!--Botón para editar-->
+      <!-- Botones de Acción -->
       <div class="tarea-botones">
+        <!-- BOTÓN EDITAR -->
         <a
           href="{% url 'editar_tarea' tarea.id %}"
           class="edit-button"
@@ -46,8 +54,7 @@
           </svg>
         </a>
 
-        <!-- Botón de eliminar en la parte inferior derecha -->
-
+        <!-- BOTÓN ELIMINAR -->
         <a
           href="{% url 'eliminar_tarea' tarea.id %}"
           class="delete-button"
@@ -74,20 +81,21 @@
   </a>
   {% endfor %}
 
+  <!-- ============================================== -->
+  <!-- MODAL DE CREAR (El que ya tenías y funciona) -->
+  <!-- ============================================== -->
   <div id="modalCrearTarea" class="modal-overlay">
     <div class="modal-contenido">
       <div class="modal-cabecera">
         <h2>Crear Tarea</h2>
         <button id="btnCerrarModal" class="btn-cerrar">&times;</button>
       </div>
-
       <form
         method="POST"
         action="{% url 'crear_tarea' %}"
         enctype="multipart/form-data"
       >
         {% csrf_token %} {{ form.as_p }}
-
         <div class="modal-acciones">
           <button type="button" id="btnCancelar" class="btn-secundario">
             Cancelar
@@ -97,30 +105,91 @@
       </form>
     </div>
   </div>
+
+  <!-- ============================================== -->
+  <!-- NUEVO: MODAL DE EDITAR (Se abre automático si 'editando' es True) -->
+  <!-- ============================================== -->
+  {% if editando %}
+  <div id="modalEditarTarea" class="modal-overlay">
+    <div class="modal-contenido">
+      <div class="modal-cabecera">
+        <h2>Editar Tarea</h2>
+        <!-- Al darle a la X o cancelar, te devuelve a la lista normal -->
+        <a
+          href="{% url 'lista_de_tareas' %}"
+          class="btn-cerrar"
+          style="text-decoration: none"
+          >&times;</a
+        >
+      </div>
+      <!-- No lleva 'action' porque envía los datos a la misma URL en la que está -->
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %} {{ form.as_p }}
+        <div class="modal-acciones">
+          <a
+            href="{% url 'lista_de_tareas' %}"
+            class="btn-secundario"
+            style="text-decoration: none"
+            >Cancelar</a
+          >
+          <button type="submit" class="btn-primario">Guardar Cambios</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  {% endif %}
 </div>
 
 <script>
-  const modal = document.getElementById("modalCrearTarea");
-  const btnAbrir = document.getElementById("btnAbrirModal");
-  const btnCerrar = document.getElementById("btnCerrarModal");
-  const btnCancelar = document.getElementById("btnCancelar");
+  const modalCrear = document.getElementById("modalCrearTarea");
+  const btnAbrirCrear = document.getElementById("btnAbrirModal");
+  const btnCerrarCrear = document.getElementById("btnCerrarModal");
+  const btnCancelarCrear = document.getElementById("btnCancelar");
 
-  btnAbrir.addEventListener("click", () => {
-    modal.classList.add("activo");
+  btnAbrirCrear.addEventListener("click", () =>
+    modalCrear.classList.add("activo"),
+  );
+  btnCerrarCrear.addEventListener("click", () =>
+    modalCrear.classList.remove("activo"),
+  );
+  btnCancelarCrear.addEventListener("click", () =>
+    modalCrear.classList.remove("activo"),
+  );
+
+  modalCrear.addEventListener("click", (e) => {
+    if (e.target === modalCrear) modalCrear.classList.remove("activo");
   });
 
-  btnCerrar.addEventListener("click", () => {
-    modal.classList.remove("activo");
-  });
+  const modalEditar = document.getElementById("modalEditarTarea");
 
-  btnCancelar.addEventListener("click", () => {
-    modal.classList.remove("activo");
-  });
+  if (modalEditar) {
+    setTimeout(() => {
+      modalEditar.classList.add("activo");
+    }, 10);
 
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
-      modal.classList.remove("activo");
-    }
-  });
+    const btnCerrarEditar = modalEditar.querySelector(".btn-cerrar");
+    const btnCancelarEditar = modalEditar.querySelector(".btn-secundario");
+
+    const cerrarConAnimacion = (e) => {
+      e.preventDefault();
+      const urlDestino = e.currentTarget.href;
+      modalEditar.classList.remove("activo");
+      setTimeout(() => {
+        window.location.href = urlDestino;
+      }, 300);
+    };
+
+    btnCerrarEditar.addEventListener("click", cerrarConAnimacion);
+    btnCancelarEditar.addEventListener("click", cerrarConAnimacion);
+    modalEditar.addEventListener("click", (e) => {
+      if (e.target === modalEditar) {
+        e.preventDefault();
+        modalEditar.classList.remove("activo");
+        setTimeout(() => {
+          window.location.href = btnCerrarEditar.href;
+        }, 300);
+      }
+    });
+  }
 </script>
 {% endblock %}

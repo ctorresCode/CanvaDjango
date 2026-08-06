@@ -1,4 +1,5 @@
 from django.contrib import admin
-from academico.models import Curso
+from evaluaciones.models import Tarea
 
 # Register your models here.
+admin.site.register(Tarea)
