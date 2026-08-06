@@ -1,0 +1,23 @@
+{% extends 'baseEstudiantes.html' %} {%load static%} {%block extra_css%}
+<link
+  rel="stylesheet"
+  href="{% static 'academico/css/lista_cursoEstudianteInscritos.css' %}"
+/>
+{%endblock%} {%block content%}
+<div class="page-container">
+  <h1>Lista de Cursos Inscritos</h1>
+  <div class="curso-list-Inscripcion-container">
+    {% for curso in cursos %}
+    <div class="curso-item">
+      <h2>{{ curso.nombre }}</h2>
+      <p>{{ curso.descripcion }}</p>
+      <strong>
+        <p>{{ curso.maestro }}</p>
+      </strong>
+    </div>
+    {% empty %}
+    <p>Todavía no estás inscrito en ningún curso.</p>
+    {% endfor %}
+  </div>
+</div>
+{%endblock%}

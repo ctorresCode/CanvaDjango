@@ -1,0 +1,80 @@
+{% extends 'baseEstudiantes.html' %} {%load static%} {%block extra_css%}
+<link
+  rel="stylesheet"
+  href="{% static 'academico/css/lista_cursoEstudianteInscripcion.css' %}"
+/>
+{%endblock%} {%block content%}
+<div class="page-container">
+  <h1>Lista de Cursos para inscribirse</h1>
+  <div class="curso-list-Inscripcion-container">
+    {% for curso in cursos %}
+    <div class="curso-item">
+      <div class="curso-info">
+        <h2>{{ curso.nombre }}</h2>
+        <p>{{ curso.descripcion }}</p>
+        <strong>
+          <p>{{ curso.maestro }}</p>
+        </strong>
+      </div>
+
+      <div class="accion-inscripcion">
+        {% if curso.id in cursos_inscritos_ids %}
+        <button class="btn btn-inscrito" type="button" disabled>
+          Ya inscrito
+        </button>
+        {% else %}
+        <form
+          class="inscripcion-form"
+          method="post"
+          action="{% url 'inscribir_curso' curso.id %}"
+        >
+          {% csrf_token %}
+          <button class="btn" type="submit">Inscribirse</button>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<script>
+  document.querySelectorAll(".inscripcion-form").forEach(function (form) {
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      const url = form.action;
+      const csrftoken = form.querySelector("[name=csrfmiddlewaretoken]").value;
+      const boton = form.querySelector("button");
+      boton.disabled = true;
+      boton.textContent = "Inscribiendo...";
+
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "X-CSRFToken": csrftoken,
+        },
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          alert(data.mensaje);
+
+          if (data.creada) {
+            boton.textContent = "Ya inscrito";
+            boton.classList.add("btn-inscrito");
+          } else {
+            boton.disabled = false;
+            boton.textContent = "Inscribirse";
+          }
+        })
+        .catch(function (error) {
+          alert("Ocurrió un error al inscribirte.");
+          console.error(error);
+          boton.disabled = false;
+          boton.textContent = "Inscribirse";
+        });
+    });
+  });
+</script>
+
+{%endblock%}

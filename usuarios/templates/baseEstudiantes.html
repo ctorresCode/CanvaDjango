@@ -52,7 +52,7 @@
             </a>
           </li>
           <li class="menu-item menu-item-static">
-            <a href="#" class="menu-link">
+            <a href="{% url 'lista_curso_estudiante'%}" class="menu-link">
               <i class="bx bxs-school"></i>
               <span>Cursos</span>
             </a>
@@ -63,6 +63,16 @@
               <span>Tareas</span>
             </a>
           </li>
+          <li class="menu-item menu-item-static">
+            <a
+              href="{% url 'lista_curso_estudiante_inscripcion' %}"
+              class="menu-link"
+            >
+              <i class="bx bx-book-open"></i>
+              <span>Inscripción</span>
+            </a>
+          </li>
+
           <li class="menu-item menu-item-static">
             <a href="#" class="menu-link">
               <i class="bx bx-bell"></i>
