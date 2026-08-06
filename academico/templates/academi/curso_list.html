@@ -28,11 +28,9 @@
     </a>
   </div>
 
-  <!-- Lista de Cursos en Tarjetas Anchas -->
   <div class="curso-container-list">
     {% for curso in cursos %}
     <div class="curso-card-wrapper">
-      <!-- Toda la tarjeta es un link hacia el detalle del curso -->
       <a href="{% url 'curso_detail' curso.id %}" class="curso-item">
         <div class="curso-content">
           <h3>{{ curso.nombre }}</h3>
@@ -40,7 +38,6 @@
           <p class="curso-profesor">{{ curso.maestro }}</p>
         </div>
 
-        <!-- Flecha indicadora de navegación en la esquina superior derecha -->
         <div class="arrow-icon">
           <svg
             width="20"
@@ -59,10 +56,9 @@
           </svg>
         </div>
       </a>
-      <!--Botón para editar-->
       <a
         href="{% url 'curso_update' curso.id %}"
-        class="edit-button"
+        class="edit-button icon-button"
         title="Editar curso"
       >
         <svg
@@ -81,11 +77,9 @@
           ></path>
         </svg>
       </a>
-
-      <!-- Botón de eliminar en la parte inferior derecha -->
       <a
         href="{% url 'curso_delete' curso.id %}"
-        class="delete-button"
+        class="delete-button icon-button"
         title="Eliminar curso"
       >
         <svg

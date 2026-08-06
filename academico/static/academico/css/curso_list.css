@@ -2,13 +2,19 @@
   padding: 2rem;
   width: 100%;
   max-width: 1280px;
-  margin-left: 100px;
   font-family:
     "Inter",
     system-ui,
     -apple-system,
     sans-serif;
   box-sizing: border-box;
+}
+
+@media (max-width: 700px) {
+  .page-container {
+    margin-left: 0;
+    padding: 1rem;
+  }
 }
 
 .header {
@@ -98,6 +104,11 @@
   font-size: 1.05rem;
   color: #475569;
   line-height: 1.6;
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .arrow-icon {
@@ -110,10 +121,17 @@
   transform: translateX(4px);
 }
 
-.delete-button {
+.curso-item:focus-visible,
+.edit-button:focus-visible,
+.delete-button:focus-visible,
+.button-create:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.icon-button {
   position: absolute;
   bottom: 1.5rem;
-  right: 2rem;
   color: #0f172a;
   padding: 8px;
   border-radius: 8px;
@@ -127,31 +145,24 @@
   z-index: 2;
 }
 
+.icon-button:hover {
+  transform: scale(1.15);
+}
+
 .edit-button {
-  position: absolute;
-  bottom: 1.5rem;
   right: 4rem;
-  color: #0f172a;
-  padding: 8px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  transition:
-    color 0.2s ease,
-    transform 0.2s ease;
-  z-index: 2;
 }
 
 .edit-button:hover {
   color: #1008e7;
-  transform: scale(1.15);
+}
+
+.delete-button {
+  right: 2rem;
 }
 
 .delete-button:hover {
   color: #ef4444;
-  transform: scale(1.15);
 }
 
 /* Empty state */
