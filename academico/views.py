@@ -3,6 +3,7 @@ from django.http import JsonResponse, request
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView, View
@@ -116,10 +117,10 @@ class InscribirCursoView(View):
 
             return JsonResponse({'mensaje': mensaje, 'creada': creada})
 
-class tableroEstudianteView(ListView):
+class tableroEstudianteView(LoginRequiredMixin,ListView):
     model = Tarea
     template_name = 'academi/tablero_estudiante.html'
-    context_object_name = 'Tareas'
+    context_object_name = 'tareas'
 
     def get_queryset(self):
         try:
@@ -127,6 +128,8 @@ class tableroEstudianteView(ListView):
         except Estudiante.DoesNotExist:
             return Tarea.objects.none()
 
-        return Tarea.objects.filter(estudiante=estudiante)        
+        return Tarea.objects.filter(
+            curso__estudiantes_inscritos__estudiante=estudiante
+        ).select_related('curso').order_by('Fecha_entrega').distinct()
 
 

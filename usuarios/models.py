@@ -26,7 +26,7 @@ class Estudiante(models.Model):
     descripcion_personal = models.TextField(blank=True)
 
     def __str__(self):
-        return f"Estudiante: {self.usuario.get_full_name() or self.usuario.username}"
+        return f"Estudiante: {self.usuario.get_full_name() or self.usuario.email}"
 
 class Maestro(models.Model):
     usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE, primary_key=True, related_name='perfil_maestro')

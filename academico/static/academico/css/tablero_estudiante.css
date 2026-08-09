@@ -1,0 +1,192 @@
+.lista-tareas-container {
+  font-family: Arial, sans-serif;
+  margin: 0 auto;
+  color: #333;
+}
+
+.fecha-grupo {
+  font-size: 16px;
+  font-weight: 500;
+  color: #3f3f3f;
+  margin: 25px 0 10px 40px;
+}
+
+.tarea-row {
+  display: flex;
+  align-items: center;
+  padding: 25px 50px;
+  border-bottom: 1px solid #e0e0e0;
+  width: 180%;
+}
+
+.indicador-container {
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dot-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-indicator.blue {
+  background-color: #0077c0;
+}
+
+.curso-box {
+  width: 160px;
+  min-height: 50px;
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: flex-start;
+  padding: 8px;
+  margin-right: 20px;
+  background-color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.curso-codigo {
+  font-size: 11px;
+  color: #006b9f;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.border-magenta {
+  border-top: 3px solid #c83273;
+}
+
+.border-morado {
+  border-top: 3px solid #8e44ad;
+}
+
+.curso-imagen-fondo {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 25px;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  opacity: 0.9;
+}
+
+.curso-box .curso-codigo {
+  position: relative;
+  z-index: 1;
+}
+
+.tarea-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.colapsado .flecha-icono {
+  font-size: 20px;
+  color: #0077c0;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.texto-azul,
+.tarea-titulo {
+  color: #0077c0;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.texto-azul:hover,
+.tarea-titulo:hover {
+  text-decoration: underline;
+}
+
+.detallado {
+  align-items: flex-start;
+}
+
+.iconos-accion {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.tarea-checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.icono-editar {
+  font-size: 16px;
+  color: #c83273;
+  cursor: pointer;
+}
+
+.tarea-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tarea-subtitulo {
+  font-size: 11px;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.tarea-acciones,
+.tarea-meta {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding-left: 20px;
+}
+
+.badge {
+  padding: 3px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+}
+
+.badge-outline {
+  border: 1px solid #888;
+  color: #666;
+  background: #fff;
+}
+
+.badge-red {
+  border: 1px solid #d93a40;
+  color: #d93a40;
+  background: #fff;
+}
+
+.puntos-fecha {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.puntos {
+  font-size: 18px;
+  color: #333;
+}
+
+.puntos small {
+  font-size: 11px;
+  color: #888;
+}
+
+.fecha {
+  font-size: 10px;
+  color: #888;
+  text-transform: uppercase;
+}

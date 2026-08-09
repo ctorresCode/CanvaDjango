@@ -1,9 +1,70 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body></body>
-</html>
+{% extends 'baseEstudiantes.html' %} {% load static %} {% block extra_css %}
+<link
+  rel="stylesheet"
+  href="{% static 'academico/css/tablero_estudiante.css' %}"
+/>
+{% endblock %} {% block content %}
+<div class="lista-tareas-container">
+  {% regroup tareas by Fecha_entrega|date:"l, d \d\e F" as tareas_por_fecha %}
+  {% for grupo in tareas_por_fecha %}
+  <h3 class="fecha-grupo">{{ grupo.grouper }}</h3>
+
+  {% for tarea in grupo.list %}
+  <div class="tarea-row">
+    <div class="indicador-container">
+      {% if tarea.estado == 'Activa' %}
+      <span class="dot-indicator blue"></span>
+      {% endif %}
+    </div>
+
+    <div class="curso-box border-morado">
+      <span class="curso-codigo">{{ tarea.curso.nombre|upper }}</span>
+
+      {% if tarea.curso.imagen %}
+      <div
+        class="curso-imagen-fondo"
+        style="background-image: url('{{ tarea.curso.imagen.url }}');"
+      ></div>
+      {% else %}
+      <div class="curso-imagen-fondo" style="background-color: #a569bd"></div>
+      {% endif %}
+    </div>
+
+    <div class="tarea-content detallado">
+      <div class="iconos-accion">
+        <input type="checkbox" class="tarea-checkbox" />
+        <span class="icono-editar">&#9998;</span>
+      </div>
+
+      <div class="tarea-info">
+        <span class="tarea-subtitulo"
+          >{{ tarea.curso.nombre|upper }} TAREA</span
+        >
+        <a href="#" class="tarea-titulo">{{ tarea.titulo }}</a>
+      </div>
+    </div>
+
+    <div class="tarea-meta">
+      {% if tarea.estado == 'Vencida' %}
+      <span class="badge badge-red">Faltante</span>
+      {% else %}
+      <span class="badge badge-outline">Pendiente</span>
+      {% endif %}
+
+      <div class="puntos-fecha">
+        <span class="puntos"
+          >{{ tarea.cantidad_puntos }} <small>PTS</small></span
+        >
+        <span class="fecha"
+          >FECHA DE ENTREGA: {{ tarea.Fecha_entrega|time:"H:i" }}</span
+        >
+      </div>
+    </div>
+  </div>
+  {% endfor %} {% empty %}
+  <h3 class="fecha-grupo" style="color: #888">
+    No tienes tareas pendientes. ¡Todo al día!
+  </h3>
+  {% endfor %}
+</div>
+{% endblock %}

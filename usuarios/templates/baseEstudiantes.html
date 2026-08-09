@@ -39,14 +39,8 @@
           <input type="search" placeholder="Search" />
         </div>
         <ul class="menu">
-          <li class="menu-item menu-item-static active">
-            <a href="#" class="menu-link">
-              <i class="bx bx-home-alt-2"></i>
-              <span>Inicio</span>
-            </a>
-          </li>
           <li class="menu-item menu-item-static">
-            <a href="#" class="menu-link">
+            <a href="{% url 'tablero_estudiante' %}" class="menu-link">
               <i class="bx bx-bar-chart-alt-2"></i>
               <span>Dashboard</span>
             </a>
@@ -55,12 +49,6 @@
             <a href="{% url 'lista_curso_estudiante'%}" class="menu-link">
               <i class="bx bxs-school"></i>
               <span>Cursos</span>
-            </a>
-          </li>
-          <li class="menu-item menu-item-static">
-            <a href="#" class="menu-link">
-              <i class="bx bx-task"></i>
-              <span>Tareas</span>
             </a>
           </li>
           <li class="menu-item menu-item-static">
