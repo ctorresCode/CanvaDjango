@@ -1,42 +1,71 @@
-{% extends 'baseEstudiantes.html' %} {%load static%} {%block extra_css%}
+{% extends 'baseEstudiantes.html' %} {% load static %} {% block extra_css %}
 <link
   rel="stylesheet"
   href="{% static 'academico/css/lista_cursoEstudianteInscripcion.css' %}"
 />
-{%endblock%} {%block content%}
+{% endblock %} {% block content %}
 <div class="page-container">
-  <h1>Lista de Cursos para inscribirse</h1>
-  <div class="curso-list-Inscripcion-container">
+  <h1 class="titulo-pagina">Cursos Disponibles para inscripción</h1>
+
+  <div class="canvas-grid-container">
     {% for curso in cursos %}
-    <div class="curso-item">
-      <div class="curso-info">
-        <h2>{{ curso.nombre }}</h2>
-        <p>{{ curso.descripcion }}</p>
-        <strong>
-          <p>{{ curso.maestro }}</p>
-        </strong>
+    <div class="canvas-card">
+      <div
+        class="canvas-card-header"
+        {%
+        if
+        curso.imagen
+        %}
+        style="background-image: url('{{ curso.imagen.url }}');"
+        {%
+        else
+        %}
+        style="background-color: #34495e"
+        {%
+        endif
+        %}
+      >
+        <div class="canvas-card-overlay"></div>
+        <div class="canvas-card-menu">&#8942;</div>
       </div>
 
-      <div class="accion-inscripcion">
-        {% if curso.id in cursos_inscritos_ids %}
-        <button class="btn btn-inscrito" type="button" disabled>
-          Ya inscrito
-        </button>
-        {% else %}
-        <form
-          class="inscripcion-form"
-          method="post"
-          action="{% url 'inscribir_curso' curso.id %}"
-        >
-          {% csrf_token %}
-          <button class="btn" type="submit">Inscribirse</button>
-        </form>
-        {% endif %}
+      <div class="canvas-card-body">
+        <h2 class="canvas-card-title" title="{{ curso.nombre }}">
+          {{ curso.nombre|upper }}
+        </h2>
+        <p class="canvas-card-subtitle">{{ curso.maestro }}</p>
+        <p class="canvas-card-desc">{{ curso.descripcion|truncatechars:45 }}</p>
+
+        <div class="canvas-card-footer">
+          <span class="canvas-icon"></span>
+
+          <div class="accion-inscripcion">
+            {% if curso.id in cursos_inscritos_ids %}
+            <button class="btn-canvas btn-inscrito" type="button" disabled>
+              Ya inscrito
+            </button>
+            {% else %}
+            <form
+              class="inscripcion-form"
+              method="post"
+              action="{% url 'inscribir_curso' curso.id %}"
+            >
+              {% csrf_token %}
+              <button class="btn-canvas btn-inscribir" type="submit">
+                Inscribirse
+              </button>
+            </form>
+            {% endif %}
+          </div>
+        </div>
       </div>
     </div>
+    {% empty %}
+    <p style="color: #666">No hay cursos disponibles en este momento.</p>
     {% endfor %}
   </div>
 </div>
+
 <script>
   document.querySelectorAll(".inscripcion-form").forEach(function (form) {
     form.addEventListener("submit", function (event) {
@@ -61,6 +90,7 @@
 
           if (data.creada) {
             boton.textContent = "Ya inscrito";
+            boton.classList.remove("btn-inscribir");
             boton.classList.add("btn-inscrito");
           } else {
             boton.disabled = false;
@@ -76,5 +106,4 @@
     });
   });
 </script>
-
-{%endblock%}
+{% endblock %}

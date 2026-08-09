@@ -5,7 +5,7 @@
 }
 
 .fecha-grupo {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 500;
   color: #3f3f3f;
   margin: 25px 0 10px 40px;
@@ -99,7 +99,7 @@
 .texto-azul,
 .tarea-titulo {
   color: #0077c0;
-  font-size: 14px;
+  font-size: 20px;
   text-decoration: none;
 }
 
@@ -138,7 +138,7 @@
 }
 
 .tarea-subtitulo {
-  font-size: 11px;
+  font-size: 14px;
   color: #666;
   text-transform: uppercase;
 }
@@ -154,7 +154,7 @@
 .badge {
   padding: 3px 10px;
   border-radius: 15px;
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .badge-outline {
@@ -176,7 +176,7 @@
 }
 
 .puntos {
-  font-size: 18px;
+  font-size: 24px;
   color: #333;
 }
 
@@ -186,7 +186,7 @@
 }
 
 .fecha {
-  font-size: 10px;
+  font-size: 18px;
   color: #888;
   text-transform: uppercase;
 }
