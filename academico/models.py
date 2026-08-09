@@ -6,6 +6,7 @@ from usuarios.models import Estudiante, Maestro
 class Curso(models.Model):
     nombre = models.CharField(max_length=100)
     descripcion = models.TextField()
+    imagen = models.ImageField(upload_to='cursos/', null=True, blank=True)
     maestro = models.ForeignKey(Maestro, on_delete=models.CASCADE, related_name='cursos_impartidos')
     
     def __str__(self):

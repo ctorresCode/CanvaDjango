@@ -1,6 +1,6 @@
 from django.urls import include, path
 
-from academico.views import CursoCreateView, CursoDeleteView, CursoDetailView, CursoListView, CursoUpdateView, InscribirCursoView, ListaCursoEstudianteView, MisCursosEstudianteView
+from academico.views import CursoCreateView, CursoDeleteView, CursoDetailView, CursoListView, CursoUpdateView, InscribirCursoView, ListaCursoEstudianteView, MisCursosEstudianteView, tableroEstudianteView
 
 urlpatterns = [
     path('panel-maestro/academico/', CursoListView.as_view(), name='curso_list'),
@@ -15,5 +15,6 @@ urlpatterns = [
 
     #desde el panel del estudiante, ver los cursos en los que ya está inscrito
     path('panel-estudiante/academico/mis-cursos/', MisCursosEstudianteView.as_view(), name='lista_curso_estudiante'),
+    path('panel-estudiante/academico/tablero/', tableroEstudianteView.as_view(), name='tablero_estudiante'),
 
 ]

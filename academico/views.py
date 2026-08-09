@@ -9,6 +9,7 @@ from django.views.generic import CreateView, DeleteView, DetailView, ListView, U
 
 from academico import models
 from academico.models import Curso, Inscripcion
+from evaluaciones.models import Tarea
 from usuarios.models import Estudiante
 
 # Create your views here.
@@ -29,7 +30,7 @@ class CursoDetailView(DetailView):
 class CursoCreateView(CreateView):
     model = Curso
     template_name = 'academi/curso_form.html'
-    fields = ['nombre', 'descripcion']
+    fields = ['nombre', 'descripcion', 'imagen']
     success_url = reverse_lazy('curso_list')
 
     def form_valid(self, form):
@@ -40,7 +41,7 @@ class CursoCreateView(CreateView):
 class CursoUpdateView(UpdateView):
     model = Curso
     template_name = 'academi/curso_update.html'
-    fields = ['nombre', 'descripcion']
+    fields = ['nombre', 'descripcion', 'imagen']
     success_url = reverse_lazy('curso_list')
 
     def form_valid(self, form):
@@ -114,5 +115,18 @@ class InscribirCursoView(View):
                 mensaje = 'Ya estabas inscrito en este curso.'
 
             return JsonResponse({'mensaje': mensaje, 'creada': creada})
+
+class tableroEstudianteView(ListView):
+    model = Tarea
+    template_name = 'academi/tablero_estudiante.html'
+    context_object_name = 'Tareas'
+
+    def get_queryset(self):
+        try:
+            estudiante = self.request.user.perfil_estudiante
+        except Estudiante.DoesNotExist:
+            return Tarea.objects.none()
+
+        return Tarea.objects.filter(estudiante=estudiante)        
 
 

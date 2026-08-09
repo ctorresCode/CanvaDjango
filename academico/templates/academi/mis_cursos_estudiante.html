@@ -4,20 +4,45 @@
   href="{% static 'academico/css/lista_cursoEstudianteInscritos.css' %}"
 />
 {%endblock%} {%block content%}
-<div class="page-container">
-  <h1>Lista de Cursos Inscritos</h1>
-  <div class="curso-list-Inscripcion-container">
-    {% for curso in cursos %}
-    <div class="curso-item">
-      <h2>{{ curso.nombre }}</h2>
-      <p>{{ curso.descripcion }}</p>
-      <strong>
-        <p>{{ curso.maestro }}</p>
-      </strong>
+<div class="main-dashboard-layout">
+  <div class="seccion-cursos">
+    <div class="tablero-header">
+      <h1>Tablero</h1>
     </div>
-    {% empty %}
-    <p>Todavía no estás inscrito en ningún curso.</p>
-    {% endfor %}
+    <div class="curso-list-Inscripcion-container">
+      {% for curso in cursos %}
+      <a class="curso-link" href="#">
+        <div class="curso-item">
+          <div class="card-image-container">
+            {% if curso.imagen %}
+            <img
+              src="{{ curso.imagen.url }}"
+              alt="Imagen del curso {{ curso.nombre }}"
+              class="card-image"
+            />
+            {% else %}
+            <img
+              src="{% static 'academico/img/default_curso.png' %}"
+              alt="Sin imagen"
+              class="card-image"
+            />
+            {% endif %}
+            <div class="card-menu-icon">&#10247;</div>
+          </div>
+          <div class="card-content">
+            <h2 class="card-title">{{ curso.nombre|truncatechars:30 }}</h2>
+            <p class="card-subtitle-line1">{{ curso.maestro }}</p>
+            <p class="card-subtitle-line2">
+              {{ curso.descripcion|truncatechars:50 }}
+            </p>
+          </div>
+        </div>
+      </a>
+      {% empty %}
+      <p>Todavía no estás inscrito en ningún curso.</p>
+      {% endfor %}
+    </div>
   </div>
+  <aside class="seccion-lateral"></aside>
 </div>
 {%endblock%}
