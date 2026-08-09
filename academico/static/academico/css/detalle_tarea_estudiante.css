@@ -1,0 +1,68 @@
+.tarea-detalle-container {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  max-width: 950px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 30px auto;
+  color: #2d3b45;
+  padding: 20px;
+}
+
+.tarea-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.tarea-titulo-canvas {
+  font-size: 26px;
+  font-weight: 400;
+  color: #003366;
+  margin: 0;
+  letter-spacing: -0.5px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.btn-empezar-canvas {
+  background-color: #2874a6;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 400;
+  border: 1px solid #1a5276;
+  transition: background-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.btn-empezar-canvas:hover {
+  background-color: #1a5276;
+  cursor: pointer;
+}
+
+.btn-anterior-canvas {
+  text-decoration: none;
+  color: black;
+  background-color: #b7bbbf;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.btn-anterior-canvas:hover {
+  background-color: #9fa3a7;
+  cursor: pointer;
+}
+
+.back-container-canvas {
+  margin-top: 20px;
+}
+
+.tarea-descripcion-canvas {
+  margin-top: 15px;
+}

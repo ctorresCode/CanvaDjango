@@ -132,4 +132,19 @@ class tableroEstudianteView(LoginRequiredMixin,ListView):
             curso__estudiantes_inscritos__estudiante=estudiante
         ).select_related('curso').order_by('Fecha_entrega').distinct()
 
+class DetalleTareaEstudianteView(LoginRequiredMixin, DetailView):
+    model = Tarea
+    template_name = 'academi/detalle_tarea_estudiante.html'
+    context_object_name = 'tarea'
+
+    def get_queryset(self):
+        try:
+            estudiante = self.request.user.perfil_estudiante
+        except Estudiante.DoesNotExist:
+            return Tarea.objects.none()
+
+        return Tarea.objects.filter(
+            curso__estudiantes_inscritos__estudiante=estudiante
+        ).select_related('curso').distinct()    
+
 

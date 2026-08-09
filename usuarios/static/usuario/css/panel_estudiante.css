@@ -56,11 +56,11 @@ body {
 .sidebar.minimize {
   width: 4.94rem;
 }
-/* Header */
+
 .header {
   width: 100%;
 }
-/*Menu Button*/
+
 .menu-btn {
   position: absolute;
   top: 3.5%;

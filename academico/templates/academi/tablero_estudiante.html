@@ -40,7 +40,11 @@
         <span class="tarea-subtitulo"
           >{{ tarea.curso.nombre|upper }} TAREA</span
         >
-        <a href="#" class="tarea-titulo">{{ tarea.titulo }}</a>
+        <a
+          href="{% url 'detalle_tarea_estudiante' tarea.pk %}"
+          class="tarea-titulo"
+          >{{ tarea.titulo }}</a
+        >
       </div>
     </div>
 

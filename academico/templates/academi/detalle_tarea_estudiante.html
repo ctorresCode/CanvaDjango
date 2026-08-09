@@ -1,0 +1,62 @@
+{% extends 'baseEstudiantes.html' %} {% load static %} {% block extra_css %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'academico/css/detalle_tarea_estudiante.css' %}"
+/>
+{% endblock %} {% block content %}
+<div class="tarea-detalle-container">
+  <div class="tarea-cabecera">
+    <h1 class="tarea-titulo-canvas">{{ tarea.titulo|upper }}</h1>
+    <a href="#" class="btn-empezar-canvas">Empezar tarea</a>
+  </div>
+
+  <hr class="canvas-hr" />
+
+  <div class="tarea-meta-canvas">
+    <div class="meta-fila">
+      <span class="meta-item">
+        <strong>Fecha de entrega</strong> {{ tarea.Fecha_entrega }}
+      </span>
+      <span class="meta-item">
+        <strong>Puntos</strong> {{ tarea.cantidad_puntos }}
+      </span>
+      <span class="meta-item">
+        <strong>Entregando</strong> {{ tarea.tipo_entrega }}
+      </span>
+    </div>
+    <div class="meta-fila"></div>
+  </div>
+
+  <hr class="canvas-hr" />
+  <div class="tarea-descripcion-canvas">{{ tarea.descripcion | safe }}</div>
+
+  <!-- Aquí se ven los archivos adjuntos puestos por el maestro-->
+  {% if tarea.archivos.all %}
+  <div class="tarea-archivos-canvas">
+    <br />
+    <ul class="lista-archivos-canvas">
+      {% for adjunto in tarea.archivos.all %}
+      <li>
+        <a
+          href="{{ adjunto.archivo.url }}"
+          download
+          class="btn-descargar-canvas"
+        >
+          <span style="font-size: 16px; margin-right: 5px"></span>
+          Descargar Archivo Adjunto {{ forloop.counter }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  <div class="back-container-canvas">
+    <hr class="canvas-hr" style="margin-bottom: 20px" />
+    <a href="{% url 'tablero_estudiante' %}" class="btn-anterior-canvas">
+      &#9664; Anterior
+    </a>
+  </div>
+</div>
+{% endblock %}

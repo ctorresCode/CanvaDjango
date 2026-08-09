@@ -89,8 +89,10 @@
 
 .modal-contenido {
   background-color: #ffffff;
-  width: 500px;
+  width: 800px;
   max-width: 90%;
+  max-height: 85vh;
+  overflow-y: auto;
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
@@ -109,6 +111,13 @@
   margin-bottom: 20px;
   border-bottom: 1px solid #eee;
   padding-bottom: 10px;
+}
+
+.modal-cabecera h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #020000;
 }
 
 .btn-cerrar {
@@ -133,6 +142,7 @@
 .btn-primario {
   background-color: #000000;
   color: #ffffff;
+  border: none;
   border-radius: 12px;
   font-weight: 600;
   font-size: 0.95rem;
@@ -140,13 +150,33 @@
   transition:
     transform 0.2s ease,
     background-color 0.2s ease;
-  padding: 10px;
+  padding: 10px 18px;
+  cursor: pointer;
 }
 
 .btn-primario:hover {
   background-color: #27272a;
   transform: translateY(-2px);
   cursor: pointer;
+}
+
+.btn-secundario {
+  background-color: #ffffff;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 10px 18px;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.btn-secundario:hover {
+  background-color: #f3f4f6;
+  transform: translateY(-2px);
 }
 
 .contenedor_tareas {
@@ -181,4 +211,79 @@
 
 .titulo_tareasActivas {
   color: #020000;
+}
+
+/* ===== Formulario dentro del modal ===== */
+
+.modal-contenido form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 20px;
+}
+
+/* Titulo, Descripcion, Fecha y Archivos ocupan todo el ancho */
+.modal-contenido form p:nth-of-type(1),
+.modal-contenido form p:nth-of-type(2),
+.modal-contenido form p:nth-of-type(5),
+.modal-contenido form p:nth-of-type(6) {
+  grid-column: 1 / -1;
+}
+
+.modal-contenido form p {
+  margin: 0;
+}
+
+.modal-contenido form label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.modal-contenido form input[type="text"],
+.modal-contenido form input[type="number"],
+.modal-contenido form input[type="datetime-local"],
+.modal-contenido form select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #111827;
+  background-color: #fff;
+  box-sizing: border-box;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.modal-contenido form input:focus,
+.modal-contenido form select:focus {
+  outline: none;
+  border-color: #000000;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
+}
+
+.modal-contenido form input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px dashed #d1d5db;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  font-size: 13px;
+  color: #6b7280;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+/* Caja del editor TinyMCE (barra de herramientas) */
+.modal-contenido form .tox-tinymce {
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+.modal-acciones {
+  grid-column: 1 / -1;
 }

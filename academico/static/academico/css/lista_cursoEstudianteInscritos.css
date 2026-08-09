@@ -31,9 +31,8 @@
 }
 
 .curso-list-Inscripcion-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
 
@@ -41,10 +40,11 @@
   text-decoration: none;
   color: inherit;
   display: block;
+  min-width: 0;
 }
 
 .curso-item {
-  width: 280px;
+  width: 100%;
   background-color: white;
   border-radius: 8px;
   overflow: hidden;

@@ -9,6 +9,7 @@ urlpatterns = [
     path('', include('usuarios.urls')),
     path('', include('academico.urls')),
     path('', include('evaluaciones.urls')),
+    path('tinymce/', include('tinymce.urls')),
 ]
 
 if settings.DEBUG:

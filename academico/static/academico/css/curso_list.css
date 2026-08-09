@@ -1,7 +1,7 @@
 .page-container {
   padding: 2rem;
   width: 100%;
-  max-width: 1280px;
+  max-width: 1600px;
   font-family:
     "Inter",
     system-ui,
@@ -48,125 +48,164 @@
 }
 
 .curso-container-list {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
-  justify-content: space-between;
-  gap: 40px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
   width: 100%;
   margin-top: 30px;
 }
 
 .curso-card-wrapper {
   position: relative;
-  flex: 1 1 320px;
-  max-width: 360px;
-  min-width: 280px;
+  min-width: 0;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.curso-card-wrapper:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.12);
 }
 
 .curso-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  display: block;
   text-decoration: none;
-  background-color: #ffffff;
-  border: 1px solid #f1f5f9;
-  border-radius: 20px;
-  padding: 2rem 2.5rem 3.5rem 2.5rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
-  box-sizing: border-box;
+  color: inherit;
 }
 
-.curso-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 25px -5px rgba(0, 0, 0, 0.08);
-  border-color: #e2e8f0;
+.curso-banner {
+  position: relative;
+  height: 130px;
+  background-color: #94a3b8;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.curso-content {
-  padding-right: 2rem;
-  height: 230px;
+.curso-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.curso-item h3 {
-  margin: 0 0 12px 0;
-  font-size: 1.6rem;
+.curso-banner-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.85);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+}
+
+.curso-banner-circle-chica {
+  position: absolute;
+  bottom: -30px;
+  left: -30px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.5);
+}
+
+.curso-body {
+  padding: 16px 18px 18px 18px;
+}
+
+.curso-titulo {
+  margin: 0 0 6px 0;
+  font-size: 0.95rem;
+  font-weight: 700;
   color: #0f172a;
-  font-weight: 800;
+  line-height: 1.3;
 }
 
-.curso-item p {
+.curso-maestro {
+  margin: 0 0 4px 0;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.curso-descripcion {
   margin: 0;
-  font-size: 1.05rem;
-  color: #475569;
-  line-height: 1.6;
+  font-size: 0.85rem;
+  color: #64748b;
   display: -webkit-box;
-  line-clamp: 3;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-.arrow-icon {
-  color: #0f172a;
-  margin-top: 6px;
-  transition: transform 0.2s ease;
-}
-
-.curso-item:hover .arrow-icon {
-  transform: translateX(4px);
-}
-
-.curso-item:focus-visible,
-.edit-button:focus-visible,
-.delete-button:focus-visible,
-.button-create:focus-visible {
-  outline: 2px solid #2563eb;
-  outline-offset: 2px;
-}
-
-.icon-button {
+.curso-menu {
   position: absolute;
-  bottom: 1.5rem;
-  color: #0f172a;
-  padding: 8px;
-  border-radius: 8px;
+  top: 10px;
+  right: 10px;
+  z-index: 3;
+}
+
+.curso-menu-btn {
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.curso-menu-btn:hover {
+  background-color: rgba(255, 255, 255, 0.45);
+}
+
+.curso-menu-btn:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+.curso-menu-dropdown {
+  position: absolute;
+  top: 34px;
+  right: 0;
+  min-width: 150px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  padding: 6px;
+  display: none;
+  flex-direction: column;
+}
+
+.curso-menu-dropdown.activo {
+  display: flex;
+}
+
+.curso-menu-dropdown a {
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: #0f172a;
   text-decoration: none;
-  transition:
-    color 0.2s ease,
-    transform 0.2s ease;
-  z-index: 2;
 }
 
-.icon-button:hover {
-  transform: scale(1.15);
+.curso-menu-dropdown a:hover {
+  background-color: #f1f5f9;
 }
 
-.edit-button {
-  right: 4rem;
-}
-
-.edit-button:hover {
-  color: #1008e7;
-}
-
-.delete-button {
-  right: 2rem;
-}
-
-.delete-button:hover {
-  color: #ef4444;
-}
-
-/* Empty state */
 .empty-state {
+  grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -191,21 +230,56 @@
   margin: 0;
 }
 
-.curso-profesor {
-  font-style: italic;
-  font-weight: bold;
+.curso-container-list .curso-card-wrapper:nth-child(6n + 1) .curso-banner {
+  background-color: #64748b;
+}
+.curso-container-list .curso-card-wrapper:nth-child(6n + 1) .curso-titulo {
+  color: #334155;
+}
+
+.curso-container-list .curso-card-wrapper:nth-child(6n + 2) .curso-banner {
+  background-color: #db2777;
+}
+.curso-container-list .curso-card-wrapper:nth-child(6n + 2) .curso-titulo {
+  color: #db2777;
+}
+
+.curso-container-list .curso-card-wrapper:nth-child(6n + 3) .curso-banner {
+  background-color: #9333ea;
+}
+.curso-container-list .curso-card-wrapper:nth-child(6n + 3) .curso-titulo {
+  color: #9333ea;
+}
+
+.curso-container-list .curso-card-wrapper:nth-child(6n + 4) .curso-banner {
+  background-color: #b45309;
+}
+.curso-container-list .curso-card-wrapper:nth-child(6n + 4) .curso-titulo {
+  color: #b45309;
+}
+
+.curso-container-list .curso-card-wrapper:nth-child(6n + 5) .curso-banner {
+  background-color: #4f46e5;
+}
+.curso-container-list .curso-card-wrapper:nth-child(6n + 5) .curso-titulo {
+  color: #4f46e5;
+}
+
+.curso-container-list .curso-card-wrapper:nth-child(6n + 6) .curso-banner {
+  background-color: #ea580c;
+}
+.curso-container-list .curso-card-wrapper:nth-child(6n + 6) .curso-titulo {
+  color: #ea580c;
 }
 
 @media (max-width: 1100px) {
-  .curso-card-wrapper {
-    flex-basis: calc(50% - 0.75rem);
-    max-width: calc(50% - 0.75rem);
+  .curso-container-list {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 700px) {
-  .curso-card-wrapper {
-    flex-basis: 100%;
-    max-width: 100%;
+@media (max-width: 600px) {
+  .curso-container-list {
+    grid-template-columns: repeat(1, 1fr);
   }
 }

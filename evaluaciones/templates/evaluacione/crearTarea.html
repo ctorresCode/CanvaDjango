@@ -9,7 +9,7 @@
   <h1 class="titulo-formulario">Crear Nueva Tarea</h1>
 
   <form method="POST" enctype="multipart/form-data" class="formulario-tarea">
-    {% csrf_token %} {{ form.as_p }}
+    {% csrf_token %} {{ form.as_p }} {{ form.media }}
 
     <div class="acciones-formulario">
       <button type="submit" class="btn-guardar">Crear tarea</button>

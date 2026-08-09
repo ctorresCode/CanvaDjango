@@ -8,22 +8,76 @@
 <div class="tarea-detalle-container">
   <h1 class="tarea-titulo">{{ tarea.titulo }}</h1>
   <hr class="tarea-hr" />
+
   <div class="tarea-detalle">
     <p><strong>Fecha de entrega:</strong> {{ tarea.Fecha_entrega }}</p>
     <p><strong>Puntos:</strong> {{ tarea.cantidad_puntos }}</p>
     <p><strong>Curso:</strong> {{ tarea.curso }}</p>
   </div>
   <hr class="tarea-hr" />
+
   <div class="tarea-descripcion-container">
-    <p class="tarea-descripcion">{{ tarea.descripcion }}</p>
+    <div class="tarea-descripcion">{{ tarea.descripcion | safe }}</div>
   </div>
+
+  {% if tarea.archivos.all %}
+  <div
+    class="tarea-archivos-container"
+    style="
+      margin-top: 30px;
+      padding: 15px;
+      background-color: #f8fafc;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+    "
+  >
+    <h3 style="font-size: 16px; margin-bottom: 15px; color: #334155">
+      Materiales adjuntos para esta tarea:
+    </h3>
+
+    <ul
+      style="
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      "
+    >
+      {% for adjunto in tarea.archivos.all %}
+      <li>
+        <a
+          href="{{ adjunto.archivo.url }}"
+          download
+          style="
+            text-decoration: none;
+            color: #0284c7;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background-color: white;
+            border: 1px solid #bae6fd;
+            border-radius: 6px;
+            transition: background-color 0.2s ease;
+          "
+        >
+          <span style="font-size: 18px"></span>
+          Descargar Archivo Adjunto {{ forloop.counter }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
 
   <div class="back-container">
     <hr class="hr-back" />
-    <a href="{% url 'lista_de_tareas' %}" class="back-link"
-      >Volver a la lista de tareas</a
-    >
+    <a href="{% url 'lista_de_tareas' %}" class="back-link">
+      Volver a la lista de tareas
+    </a>
   </div>
-
-  {%endblock%}
 </div>
+{% endblock %}
