@@ -1,21 +1,20 @@
 from django.utils import timezone
-
 from django.contrib import messages
 from django.db.models import Exists, OuterRef
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from .forms import EstudianteForm
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView, View
+
 
 from academico import models
 from academico.models import Curso, Inscripcion
 from evaluaciones.models import Calificacion, Tarea, ArchivoEntrega
 from usuarios.models import Estudiante
 
-# Create your views here.
 
 # Gestionar los cursos como maestro
 class CursoListView(ListView):
@@ -220,3 +219,21 @@ class DetalleTareaEstudianteView(LoginRequiredMixin, DetailView):
             messages.error(request, "Hubo un problema. Asegúrate de adjuntar al menos un archivo antes de enviar.")
 
         return redirect('detalle_tarea_estudiante', pk=tarea_actual.pk)
+
+@login_required
+def configuracion_perfil(request):
+    perfil = request.user.perfil_estudiante
+
+    if request.method == 'POST':
+        form = EstudianteForm(request.POST, request.FILES, instance=perfil)
+        
+        if form.is_valid():
+            form.save() 
+            messages.success(request, "¡Tu perfil ha sido actualizado con éxito!")
+            return redirect('configuracion_perfil') 
+        else:
+            messages.error(request, "Hubo un error al actualizar tu perfil. Por favor, revisa los datos ingresados.")    
+    else:
+        form = EstudianteForm(instance=perfil)
+
+    return render(request, 'academi/settings_estudiante.html', {'form': form})

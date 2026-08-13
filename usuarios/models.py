@@ -24,6 +24,7 @@ class Estudiante(models.Model):
     usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE, primary_key=True, related_name='perfil_estudiante')
     edad = models.PositiveIntegerField(null=True, blank=True)
     descripcion_personal = models.TextField(blank=True)
+    imagen_perfil = models.ImageField(upload_to='estudiantes/', null=True, blank=True)
 
     def __str__(self):
         return f"Estudiante: {self.usuario.get_full_name() or self.usuario.email}"

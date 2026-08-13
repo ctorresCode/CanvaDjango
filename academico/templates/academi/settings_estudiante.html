@@ -1,0 +1,93 @@
+{% extends 'baseEstudiantes.html' %} {% load static %} {% block extra_css %}
+<link
+  rel="stylesheet"
+  href="{% static 'academico/css/settings_estudiante.css' %}"
+/>
+{% endblock %} {% block content %}
+<div class="settings-container">
+  <h1 class="page-title">Perfil de usuario</h1>
+
+  <form method="post" enctype="multipart/form-data" class="settings-form">
+    {% csrf_token %}
+
+    <div class="profile-layout">
+      <div class="profile-sidebar">
+        <div class="profile-img-preview">
+          {% if user.perfil_estudiante.imagen_perfil %}
+          <img
+            src="{{ user.perfil_estudiante.imagen_perfil.url }}"
+            alt="Foto de perfil"
+            id="img-preview"
+          />
+          {% else %}
+          <img
+            src="{% static 'img/default_avatar.png' %}"
+            alt="Foto genérica"
+            id="img-preview"
+          />
+          {% endif %}
+        </div>
+
+        <div class="custom-file-upload">
+          <label
+            for="{{ form.imagen_perfil.id_for_label }}"
+            class="btn-edit-img"
+          >
+            Editar imagen de perfil
+          </label>
+          <div class="hidden-input">{{ form.imagen_perfil }}</div>
+        </div>
+      </div>
+
+      <div class="profile-main">
+        <h2 class="user-name">
+          {% if user.get_full_name %} {{ user.get_full_name|upper }} {% else %}
+          {{ user.email|upper }} {% endif %}
+        </h2>
+
+        <div class="form-group">
+          <label for="{{ form.edad.id_for_label }}" class="custom-label"
+            >Edad:</label
+          >
+          {{ form.edad }}
+        </div>
+
+        <div class="form-group">
+          <label
+            for="{{ form.descripcion_personal.id_for_label }}"
+            class="custom-label"
+            >Biografía:</label
+          >
+          {{ form.descripcion_personal }}
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn-submit">Guardar Cambios</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const inputImagen = document.querySelector(
+      '.hidden-input input[type="file"]',
+    );
+    const imgPreview = document.getElementById("img-preview");
+
+    if (inputImagen) {
+      inputImagen.addEventListener("change", function (event) {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            imgPreview.src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+  });
+</script>
+{% endblock %}

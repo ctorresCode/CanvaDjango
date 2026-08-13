@@ -68,7 +68,7 @@
             </a>
           </li>
           <li class="menu-item menu-item-static">
-            <a href="#" class="menu-link">
+            <a href="{% url 'configuracion_perfil'%}" class="menu-link">
               <i class="bx bx-cog"></i>
               <span>Settings</span>
             </a>
@@ -92,7 +92,10 @@
         </ul>
         <div class="user">
           <div class="user-img">
-            <img src="/user.jpg" alt="user" />
+            <img
+              src="{{ user.perfil_estudiante.imagen_perfil.url }}"
+              alt="user"
+            />
           </div>
           <div class="user-data">
             <span class="name">{{ user.first_name }} {{ user.last_name }}</span>

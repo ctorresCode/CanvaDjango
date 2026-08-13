@@ -1,6 +1,6 @@
 from django.urls import include, path
 
-from academico.views import CursoCreateView, CursoDeleteView, CursoDetailView, CursoListView, CursoUpdateView, DetalleTareaEstudianteView, InscribirCursoView, ListaCursoEstudianteView, MisCursosEstudianteView, tableroEstudianteView
+from academico.views import CursoCreateView, CursoDeleteView, CursoDetailView, CursoListView, CursoUpdateView, DetalleTareaEstudianteView, InscribirCursoView, ListaCursoEstudianteView, MisCursosEstudianteView, tableroEstudianteView, configuracion_perfil
 
 urlpatterns = [
     path('panel-maestro/academico/', CursoListView.as_view(), name='curso_list'),
@@ -16,8 +16,11 @@ urlpatterns = [
     #desde el panel del estudiante, ver los cursos en los que ya está inscrito
     path('panel-estudiante/academico/mis-cursos/', MisCursosEstudianteView.as_view(), name='lista_curso_estudiante'),
     path('panel-estudiante/academico/tablero/', tableroEstudianteView.as_view(), name='tablero_estudiante'),
+    path('panel-estudiante/academico/settings/', configuracion_perfil, name='configuracion_perfil'),
 
     #detalle de la tarea desde el panel del estudiante
     path('panel-estudiante/academico/tablero/tarea/<int:pk>/', DetalleTareaEstudianteView.as_view(),name='detalle_tarea_estudiante'),
+
+    #poder ver settings de estudiantes
 
 ]

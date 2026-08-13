@@ -1,0 +1,159 @@
+.settings-container {
+  max-width: 850px;
+  margin: 40px auto;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  color: #333;
+}
+
+.page-title {
+  color: #003366;
+  font-size: 26px;
+  font-weight: 400;
+  margin-bottom: 40px;
+}
+
+.profile-layout {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.profile-sidebar {
+  flex: 0 0 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-img-preview {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 12px;
+  border: 1px solid #e0e0e0;
+}
+
+.profile-img-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hidden-input input[type="file"] {
+  display: none;
+}
+
+.btn-edit-img {
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  color: #495057;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  display: inline-block;
+  transition: background-color 0.2s;
+}
+
+.btn-edit-img:hover {
+  background-color: #e2e6ea;
+}
+
+.profile-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.user-name {
+  color: #003366;
+  font-size: 24px;
+  font-weight: 400;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.custom-label {
+  color: #003366;
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #495057;
+  box-sizing: border-box;
+  font-family: inherit;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-group textarea {
+  min-height: 140px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.form-actions {
+  margin-top: 10px;
+}
+
+.btn-submit {
+  background-color: #003366;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  font-size: 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-submit:hover {
+  background-color: #002244;
+}
+
+@media (max-width: 650px) {
+  .profile-layout {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile-sidebar {
+    flex: none;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .user-name {
+    text-align: center;
+  }
+}
