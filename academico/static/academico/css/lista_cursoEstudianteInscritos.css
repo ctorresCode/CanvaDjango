@@ -2,14 +2,14 @@
   display: flex;
   gap: 30px;
   margin-top: 5px;
-  background-color: #ebecf2;
+  background-color: #ffffff;
   padding: 20px;
 }
 
 .seccion-cursos {
   flex: 3;
   padding: 20px;
-  background-color: #ebecf2;
+  background-color: #ffffff;
   border-radius: 8px;
 }
 

@@ -50,7 +50,7 @@
 
         <a
           href="{% url 'eliminar_tarea' tarea.id %}"
-          class="delete-button"
+          class="delete-button btn-abrir-eliminar"
           title="Eliminar tarea"
         >
           <svg
@@ -123,6 +123,37 @@
     </div>
   </div>
   {% endif %}
+
+  <div id="modalEliminarTarea" class="modal-overlay">
+    <div class="modal-contenido" style="max-width: 400px">
+      <div class="modal-cabecera">
+        <h2>Eliminar Tarea</h2>
+        <button type="button" id="btnCerrarModalEliminar" class="btn-cerrar">
+          &times;
+        </button>
+      </div>
+      <div style="margin-bottom: 25px">
+        <p style="color: #4b5563; font-size: 16px">
+          ¿Estás seguro que quieres eliminar esta tarea?
+        </p>
+      </div>
+      <form id="formEliminarTarea" method="POST" action="">
+        {% csrf_token %}
+        <div class="modal-acciones">
+          <button type="button" id="btnCancelarEliminar" class="btn-secundario">
+            Cancelar
+          </button>
+          <button
+            type="submit"
+            class="btn-primario"
+            style="background-color: #dc2626; border-color: #dc2626"
+          >
+            Eliminar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -176,5 +207,31 @@
       }
     });
   }
+
+  const modalEliminar = document.getElementById("modalEliminarTarea");
+  const formEliminar = document.getElementById("formEliminarTarea");
+  const btnCerrarEliminar = document.getElementById("btnCerrarModalEliminar");
+  const btnCancelarEliminar = document.getElementById("btnCancelarEliminar");
+  const botonesEliminar = document.querySelectorAll(".btn-abrir-eliminar");
+
+  botonesEliminar.forEach((boton) => {
+    boton.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      formEliminar.action = this.href;
+      modalEliminar.classList.add("activo");
+    });
+  });
+
+  btnCerrarEliminar.addEventListener("click", () =>
+    modalEliminar.classList.remove("activo"),
+  );
+  btnCancelarEliminar.addEventListener("click", () =>
+    modalEliminar.classList.remove("activo"),
+  );
+
+  modalEliminar.addEventListener("click", (e) => {
+    if (e.target === modalEliminar) modalEliminar.classList.remove("activo");
+  });
 </script>
 {% endblock %}

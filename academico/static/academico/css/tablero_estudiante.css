@@ -16,7 +16,7 @@
   align-items: center;
   padding: 25px 50px;
   border-bottom: 1px solid #e0e0e0;
-  width: 180%;
+  width: 140%;
 }
 
 .indicador-container {
@@ -39,6 +39,7 @@
 
 .curso-box {
   width: 160px;
+  height: 70px;
   min-height: 50px;
   border: 1px solid #ccc;
   display: flex;
@@ -52,7 +53,7 @@
 
 .curso-codigo {
   font-size: 11px;
-  color: #006b9f;
+  color: #034889;
   font-weight: bold;
   line-height: 1.2;
 }
@@ -74,7 +75,7 @@
   background-size: cover;
   background-position: center;
   z-index: 0;
-  opacity: 0.9;
+  opacity: 0.6;
 }
 
 .curso-box .curso-codigo {

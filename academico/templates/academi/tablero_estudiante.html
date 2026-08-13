@@ -49,11 +49,15 @@
     </div>
 
     <div class="tarea-meta">
-      {% if tarea.estado == 'Vencida' %}
-      <span class="badge badge-red">Faltante</span>
-      {% else %}
-      <span class="badge badge-outline">Pendiente</span>
-      {% endif %}
+      {% if tarea.esta_entregada %}
+      <span class="badge badge-outline">Entregada</span>
+      {% elif tarea.Fecha_entrega and tarea.Fecha_entrega < ahora %}
+      <span
+        class="badge badge-outline"
+        style="border-color: #ff1100; color: #fa0303"
+        >Faltante</span
+      >
+      {% else %} {% endif %}
 
       <div class="puntos-fecha">
         <span class="puntos"

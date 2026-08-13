@@ -7,31 +7,119 @@
 {% endblock %} {% block content %}
 <div class="tarea-detalle-container">
   <div class="tarea-cabecera">
+    {% if ruta_archivo %}
+    <h1 class="tarea-titulo-canvas">Detalles de la entrega</h1>
+
+    {% if not puntuacion %}
+    <p class="calificacion-texto">
+      Calificación: - / {{ tarea.cantidad_puntos }}
+    </p>
+    {% else %}
+    <p class="calificacion-texto">
+      Calificación: {{ puntuacion }} / {{ tarea.cantidad_puntos }}
+    </p>
+    {% endif %} {% else %}
     <h1 class="tarea-titulo-canvas">{{ tarea.titulo|upper }}</h1>
-    <a href="#" class="btn-empezar-canvas">Empezar tarea</a>
+
+    {% if tarea.Fecha_entrega and tarea.Fecha_entrega < ahora %}
+    <p style="color: #d9534f; font-weight: 400; margin-top: 10px">
+      El tiempo para entregar esta tarea ha terminado.
+    </p>
+    {% else %}
+    <a href="#" class="btn-empezar-canvas" id="btnEmpezar">Empezar tarea</a>
+    {% endif %} {% endif %}
   </div>
 
   <hr class="canvas-hr" />
 
+  {% if ruta_archivo %}
+  <div class="tarea-entregada-detalles">
+    <h2 class="entregada-titulo">{{ tarea.titulo }}</h2>
+    <p class="entregada-subtitulo">
+      <!-- prettier-ignore -->
+      {{ request.user.get_full_name|upper }} entregada el {{ entrega.fecha_envio }}
+    </p>
+
+    <div class="entregada-layout">
+      <div class="entregada-archivos">
+        <div class="archivos-cabecera">
+          <h4 class="archivos-titulo">Archivos</h4>
+        </div>
+
+        {% for adjunto in entrega.archivos_adjuntos.all %}
+        <div class="archivo-item" style="margin-bottom: 10px">
+          <div class="archivo-info">
+            <a
+              href="{{ adjunto.archivo.url }}"
+              target="_blank"
+              class="link-archivo-azul"
+            >
+              <!-- prettier-ignore -->
+              {{ adjunto.archivo.name|slice:"28:"|default:"Archivo_entregado" }}
+            </a>
+            <span class="archivo-peso">
+              {{ adjunto.archivo.size|filesizeformat }}
+            </span>
+          </div>
+        </div>
+        {% empty %} {% if entrega.ruta_archivo %}
+        <div class="archivo-item">
+          <div class="archivo-info">
+            <a
+              href="{{ entrega.ruta_archivo.url }}"
+              target="_blank"
+              class="link-archivo-azul"
+            >
+              <!-- prettier-ignore -->
+              {{ entrega.ruta_archivo.name|slice:"21:"|default:"Mi_tarea_entregada.pdf" }}
+            </a>
+          </div>
+        </div>
+        {% else %}
+        <p>No hay archivos adjuntos.</p>
+        {% endif %} {% endfor %}
+
+        <div class="entregada-comentarios">
+          <strong class="comentario-label">Agregar un comentario:</strong>
+          <textarea class="textarea-comentario" placeholder=""></textarea>
+
+          <div class="comentario-enlaces">
+            <a href="#" class="link-opcion"></a>
+            <a href="#" class="link-opcion">📎 Adjuntar archivo</a>
+          </div>
+
+          <p class="comentario-helper">
+            Todos los comentarios se envían al grupo completo.
+          </p>
+
+          <button class="btn-guardar-comentario">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% else %}
   <div class="tarea-meta-canvas">
     <div class="meta-fila">
       <span class="meta-item">
-        <strong>Fecha de entrega</strong> {{ tarea.Fecha_entrega }}
+        <strong>Fecha de entrega: </strong>
+        {{ tarea.Fecha_entrega|date:"j \d\e M \e\n H:i"|default:"Sin fecha" }}
       </span>
       <span class="meta-item">
-        <strong>Puntos</strong> {{ tarea.cantidad_puntos }}
+        <strong>Puntos</strong>
+        {{ tarea.cantidad_puntos }}
       </span>
       <span class="meta-item">
-        <strong>Entregando</strong> {{ tarea.tipo_entrega }}
+        <strong>Entregando</strong>
+        Carga de archivo
       </span>
     </div>
-    <div class="meta-fila"></div>
   </div>
 
   <hr class="canvas-hr" />
-  <div class="tarea-descripcion-canvas">{{ tarea.descripcion | safe }}</div>
 
-  <!-- Aquí se ven los archivos adjuntos puestos por el maestro-->
+  <div class="tarea-descripcion-canvas">{{ tarea.descripcion|safe }}</div>
+
   {% if tarea.archivos.all %}
   <div class="tarea-archivos-canvas">
     <br />
@@ -52,11 +140,181 @@
   </div>
   {% endif %}
 
+  <div
+    id="formularioEntrega"
+    class="formulario-entrega-canvas"
+    style="display: none"
+  >
+    <div class="canvas-tabs">
+      <div class="canvas-tab active">Carga del archivo</div>
+    </div>
+
+    <div class="canvas-form-body">
+      <p class="canvas-instruction">
+        Cargue un archivo o escoja un archivo ya cargado.
+      </p>
+
+      <form
+        method="POST"
+        enctype="multipart/form-data"
+        action="{% url 'detalle_tarea_estudiante' tarea.pk %}"
+      >
+        {% csrf_token %}
+
+        <div class="canvas-dropzone">
+          <p class="dropzone-text">Arrastrar un archivo hasta aquí, o</p>
+
+          <input
+            type="file"
+            name="archivos"
+            id="archivo"
+            class="input-file-oculto"
+            multiple
+            required
+          />
+          <label for="archivo" class="link-azul" id="labelArchivo">
+            Elija un archivo para cargar
+          </label>
+        </div>
+
+        <div class="mas-opciones">
+          <a href="#" id="btnAgregarOtro" class="link-azul">
+            + Agregue otro archivo
+          </a>
+          <br /><br />
+          <a href="#" class="link-azul">
+            Haga clic aquí para encontrar un archivo que ya ha cargado
+          </a>
+        </div>
+
+        <div class="comentarios-seccion">
+          <textarea name="comentarios" placeholder="Comentarios..."></textarea>
+        </div>
+
+        <div class="acciones-formulario-canvas">
+          <button type="button" id="btnCancelar" class="btn-cancelar-canvas">
+            Cancelar
+          </button>
+          <button type="submit" class="btn-entregar-final-canvas">
+            Entregar tarea
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  {% endif %}
+
   <div class="back-container-canvas">
-    <hr class="canvas-hr" style="margin-bottom: 20px" />
+    <hr class="canvas-hr" style="margin-bottom: 20px; margin-top: 20px" />
     <a href="{% url 'tablero_estudiante' %}" class="btn-anterior-canvas">
       &#9664; Anterior
     </a>
   </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const btnEmpezar = document.getElementById("btnEmpezar");
+    const btnCancelar = document.getElementById("btnCancelar");
+    const formEntrega = document.getElementById("formularioEntrega");
+    const dropzone = document.querySelector(".canvas-dropzone");
+    const inputArchivo = document.getElementById("archivo");
+    const labelArchivo = document.getElementById("labelArchivo");
+    const btnAgregarOtro = document.getElementById("btnAgregarOtro");
+
+    const dataTransfer = new DataTransfer();
+
+    if (btnEmpezar && btnCancelar && formEntrega) {
+      btnEmpezar.addEventListener("click", function (e) {
+        e.preventDefault();
+        formEntrega.style.display = "block";
+        btnEmpezar.style.display = "none";
+      });
+
+      btnCancelar.addEventListener("click", function () {
+        formEntrega.style.display = "none";
+        btnEmpezar.style.display = "block";
+
+        dataTransfer.items.clear();
+        if (inputArchivo) {
+          inputArchivo.value = "";
+        }
+        actualizarNombreArchivo();
+      });
+    }
+
+    if (btnAgregarOtro) {
+      btnAgregarOtro.addEventListener("click", function (e) {
+        e.preventDefault();
+        inputArchivo.click();
+      });
+    }
+
+    if (dropzone && inputArchivo && labelArchivo) {
+      ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
+        dropzone.addEventListener(eventName, preventDefaults, false);
+      });
+
+      function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+
+      ["dragenter", "dragover"].forEach((eventName) => {
+        dropzone.addEventListener(eventName, highlight, false);
+      });
+
+      ["dragleave", "drop"].forEach((eventName) => {
+        dropzone.addEventListener(eventName, unhighlight, false);
+      });
+
+      function highlight() {
+        dropzone.classList.add("dragover-activo");
+      }
+
+      function unhighlight() {
+        dropzone.classList.remove("dragover-activo");
+      }
+
+      dropzone.addEventListener("drop", handleDrop, false);
+
+      function handleDrop(e) {
+        let files = e.dataTransfer.files;
+        agregarArchivos(files);
+      }
+
+      inputArchivo.addEventListener("change", function () {
+        agregarArchivos(this.files);
+      });
+
+      function agregarArchivos(files) {
+        for (let i = 0; i < files.length; i++) {
+          dataTransfer.items.add(files[i]);
+        }
+        inputArchivo.files = dataTransfer.files;
+        actualizarNombreArchivo();
+      }
+
+      function actualizarNombreArchivo() {
+        if (inputArchivo.files && inputArchivo.files.length > 0) {
+          if (inputArchivo.files.length === 1) {
+            labelArchivo.textContent =
+              "Archivo cargado: " + inputArchivo.files[0].name;
+          } else {
+            labelArchivo.textContent =
+              inputArchivo.files.length +
+              " archivos cargados listos para enviar";
+          }
+          labelArchivo.style.color = "#2874a6";
+          labelArchivo.style.fontWeight = "bold";
+        } else {
+          labelArchivo.textContent = "Elija un archivo para cargar";
+          labelArchivo.style.color = "#0073a8";
+          labelArchivo.style.fontWeight = "normal";
+        }
+      }
+    }
+  });
+</script>
 {% endblock %}
