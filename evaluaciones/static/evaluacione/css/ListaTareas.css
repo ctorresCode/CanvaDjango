@@ -213,15 +213,12 @@
   color: #020000;
 }
 
-/* ===== Formulario dentro del modal ===== */
-
 .modal-contenido form {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px 20px;
 }
 
-/* Titulo, Descripcion, Fecha y Archivos ocupan todo el ancho */
 .modal-contenido form p:nth-of-type(1),
 .modal-contenido form p:nth-of-type(2),
 .modal-contenido form p:nth-of-type(5),
@@ -277,7 +274,6 @@
   box-sizing: border-box;
 }
 
-/* Caja del editor TinyMCE (barra de herramientas) */
 .modal-contenido form .tox-tinymce {
   border: 1px solid #d1d5db !important;
   border-radius: 8px !important;
@@ -286,4 +282,65 @@
 
 .modal-acciones {
   grid-column: 1 / -1;
+}
+
+.paginacion-contenedor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #e5e7eb;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  width: 1400px; /* Alineado con el ancho de tus tareas */
+  max-width: 100%;
+}
+
+.paginacion-info {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.paginacion-info span {
+  font-weight: 600;
+  color: #111827;
+}
+
+.paginacion-controles {
+  display: flex;
+  gap: 8px; /* Espacio entre los botones */
+}
+
+.paginacion-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #374151;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.paginacion-btn:hover:not(.btn-desactivado) {
+  background-color: #f9fafb;
+  color: #000000;
+  border-color: #000000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.btn-desactivado {
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  border-color: #e5e7eb;
+  cursor: not-allowed;
+  box-shadow: none;
 }

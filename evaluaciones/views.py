@@ -51,6 +51,11 @@ class ListarTareas(ListView):
     model = Tarea
     template_name = 'evaluacione/listaTareasMaestros.html'
     context_object_name = 'tareas'
+    paginate_by = 5
+
+    def get_queryset(self):
+        tareas = Tarea.objects.all()
+        return tareas
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
