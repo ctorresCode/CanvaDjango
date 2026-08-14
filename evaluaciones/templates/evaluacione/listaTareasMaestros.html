@@ -26,6 +26,7 @@
       </div>
 
       <div class="tarea-botones">
+        <a href="{% url 'lista_entregas' tarea.id %}">Lista de entrega</a>
         <a
           href="{% url 'editar_tarea' tarea.id %}"
           class="edit-button"

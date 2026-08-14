@@ -100,3 +100,6 @@ class EliminarTarea(DeleteView):
     model = Tarea
     template_name = 'evaluacione/eliminarTarea.html'
     success_url = reverse_lazy('lista_de_tareas')
+
+def ListaEntregas(request, tarea_id):
+    return render(request, 'evaluacione/listaEntregas.html')    
