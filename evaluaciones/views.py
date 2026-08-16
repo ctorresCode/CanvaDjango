@@ -1,8 +1,9 @@
 from django import forms
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
-from evaluaciones.models import ArchivoTarea, Tarea
+from evaluaciones.models import ArchivoTarea, Calificacion, Tarea
 
 class MultipleFileInput(forms.FileInput):
     def __init__(self, attrs=None):
@@ -102,4 +103,26 @@ class EliminarTarea(DeleteView):
     success_url = reverse_lazy('lista_de_tareas')
 
 def ListaEntregas(request, tarea_id):
-    return render(request, 'evaluacione/listaEntregas.html')    
+    tarea = get_object_or_404(Tarea, id=tarea_id)
+
+    entregas = Calificacion.objects.filter(tarea=tarea).select_related('estudiante__usuario').prefetch_related('archivos_adjuntos')
+
+    if request.method == 'POST':
+        entrega_id = request.POST.get('entrega_id')
+        puntuacion = request.POST.get('puntuacion')
+        retroalimentacion = request.POST.get('retroalimentacion')
+
+        if entrega_id and puntuacion:
+            entrega = get_object_or_404(Calificacion, id=entrega_id)
+            entrega.puntuacion = puntuacion
+            entrega.retroalimentacion = retroalimentacion
+            entrega.save()
+
+            messages.success(request, f'Calificación guardada')
+
+    context = {
+        'tarea': tarea,
+        'entregas': entregas,
+    }        
+
+    return render(request, 'evaluacione/listaEntregas.html', context)    

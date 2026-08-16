@@ -1,7 +1,102 @@
-{% extends 'baseMaestros.html' %} {% load static %} {% block extra_css %}
-<link
-  rel="stylesheet"
-  type="type/css"
-  href="{% static 'evaluacione/css/listaEntregas.css' %}"
-/>
-{% endblock %} {% block content %} {% endblock %}
+<!-- prettier-ignore -->
+{% extends 'baseMaestros.html' %} 
+{% load static %} 
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'evaluacione/css/listaEntregas.css' %}" />
+{% endblock %} 
+
+{% block content %}
+<div class="entregas-container">
+  <!-- Encabezado -->
+  <div class="entregas-header">
+    <div>
+      <h2>Entregas: {{ tarea.titulo }}</h2>
+      <p class="subtitulo-tarea">Curso: {{ tarea.curso.nombre }}</p>
+    </div>
+    <div class="badge-puntos">
+      Valor: <strong>{{ tarea.cantidad_puntos }} pts</strong>
+    </div>
+  </div>
+
+  {% if messages %}
+  <div class="alertas-container">
+    {% for message in messages %}
+    <div class="alerta-exito">{{ message }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- Lista de Entregas -->
+  <div class="entregas-lista">
+    {% for entrega in entregas %}
+    <div class="entrega-card">
+      
+      <!-- Columna Izquierda: Info y Formulario -->
+      <div class="col-estudiante">
+        <div class="info-estudiante">
+          <span class="avatar-placeholder">{{ entrega.estudiante.usuario.username|make_list|first|upper }}</span>
+          <div class="datos-estudiante">
+            <h3>{{ entrega.estudiante.usuario.get_full_name|default:entrega.estudiante.usuario.username }}</h3>
+            <small>Entregado: {{ entrega.fecha_envio|date:"d M Y, h:i a" }}</small>
+          </div>
+        </div>
+
+        <form method="POST" action="{% url 'lista_entregas' tarea.id %}" class="form-calificar">
+          {% csrf_token %}
+          <input type="hidden" name="entrega_id" value="{{ entrega.id }}" />
+
+          <div class="campo-grupo">
+            <label for="puntuacion_{{ entrega.id }}">Puntuación (Máx. {{ tarea.cantidad_puntos }}):</label>
+            <input type="number" id="puntuacion_{{ entrega.id }}" name="puntuacion" max="{{ tarea.cantidad_puntos }}" min="0" value="{{ entrega.puntuacion|default_if_none:'' }}" placeholder="0" required />
+          </div>
+
+          <div class="campo-grupo">
+            <label for="retro_{{ entrega.id }}">Retroalimentación:</label>
+            <textarea id="retro_{{ entrega.id }}" name="retroalimentacion" rows="3" placeholder="Escribe un comentario para el estudiante...">{{ entrega.retroalimentacion|default_if_none:'' }}</textarea>
+          </div>
+
+          <button type="submit" class="btn-guardar">
+            {% if entrega.puntuacion is not None %}Actualizar Calificación{% else %}Guardar Calificación{% endif %}
+          </button>
+        </form>
+      </div>
+
+      <!-- Columna Derecha: Documento -->
+      <div class="col-documento">
+        <h4>Archivo(s) Adjunto(s)</h4>
+
+        {% if entrega.archivos_adjuntos.all %} 
+          {% for adjunto in entrega.archivos_adjuntos.all %}
+          <div class="visor-wrapper">
+            <div class="visor-topbar">
+              <span class="nombre-archivo">{{ adjunto.archivo.name|cut:"entregas_estudiantes/multiples/" }}</span>
+              <a href="{{ adjunto.archivo.url }}" target="_blank" class="link-abrir">Abrir en ventana completa ↗</a>
+            </div>
+            <iframe src="{{ adjunto.archivo.url }}" class="iframe-documento"></iframe>
+          </div>
+          {% endfor %} 
+        {% elif entrega.ruta_archivo %}
+          <div class="visor-wrapper">
+            <div class="visor-topbar">
+              <span class="nombre-archivo">{{ entrega.ruta_archivo.name|cut:"entregas_estudiantes/" }}</span>
+              <a href="{{ entrega.ruta_archivo.url }}" target="_blank" class="link-abrir">Abrir en ventana completa ↗</a>
+            </div>
+            <iframe src="{{ entrega.ruta_archivo.url }}" class="iframe-documento"></iframe>
+          </div>
+        {% else %}
+          <div class="sin-archivo">
+            <p>El estudiante no subió ningún archivo adjunto.</p>
+          </div>
+        {% endif %}
+      </div>
+      
+    </div>
+    {% empty %}
+    <div class="sin-entregas">
+      <p>No hay entregas registradas para esta tarea todavía.</p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

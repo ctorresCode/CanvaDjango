@@ -140,3 +140,5 @@ TINYMCE_DEFAULT_CONFIG = {
     'content_style': 'body { font-family:Arial,sans-serif; font-size:14px }',
     'paste_data_images': True,
 }
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'

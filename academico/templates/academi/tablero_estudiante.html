@@ -49,7 +49,13 @@
     </div>
 
     <div class="tarea-meta">
-      {% if tarea.esta_entregada %}
+      {% if tarea.esta_calificada %}
+      <span
+        class="badge badge-outline"
+        style="border-color: #8d8e8e; color: #222121"
+        >Calificado</span
+      >
+      {% elif tarea.esta_entregada %}
       <span class="badge badge-outline">Entregada</span>
       {% elif tarea.Fecha_entrega and tarea.Fecha_entrega < ahora %}
       <span

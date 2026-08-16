@@ -344,3 +344,8 @@
   cursor: not-allowed;
   box-shadow: none;
 }
+
+.lista_de_entrega {
+  text-decoration: none;
+  color: #0f172a;
+}

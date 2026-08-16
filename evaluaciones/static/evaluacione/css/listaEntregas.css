@@ -1,0 +1,154 @@
+.entregas-container {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.entregas-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.badge-puntos {
+  background: #eef2ff;
+  color: #3730a3;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.alerta-exito {
+  background-color: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.entrega-card {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 24px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.info-estudiante {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.avatar-placeholder {
+  width: 42px;
+  height: 42px;
+  background: #000;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.form-calificar {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.campo-grupo {
+  margin-bottom: 14px;
+}
+
+.campo-grupo label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 4px;
+}
+
+.campo-grupo input,
+.campo-grupo textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+}
+
+.btn-guardar {
+  width: 100%;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-guardar:hover {
+  background-color: #333333;
+}
+
+.visor-wrapper {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.visor-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f3f4f6;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.link-abrir {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link-abrir:hover {
+  text-decoration: underline;
+}
+
+.iframe-documento {
+  width: 100%;
+  height: 520px;
+  border: none;
+  background: #fafafa;
+}
+
+.sin-archivo,
+.sin-entregas {
+  text-align: center;
+  padding: 30px;
+  color: #6b7280;
+  background: #f9fafb;
+  border-radius: 8px;
+}
+
+@media (max-width: 900px) {
+  .entrega-card {
+    grid-template-columns: 1fr;
+  }
+}

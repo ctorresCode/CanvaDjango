@@ -121,7 +121,6 @@ class InscribirCursoView(View):
 
         return JsonResponse({'mensaje': mensaje, 'creada': creada})
 
-
 class tableroEstudianteView(LoginRequiredMixin, ListView):
     model = Tarea
     template_name = 'academi/tablero_estudiante.html'
@@ -138,16 +137,24 @@ class tableroEstudianteView(LoginRequiredMixin, ListView):
             estudiante=estudiante
         )
 
+        entregas_calificadas = Calificacion.objects.filter(
+            tarea=OuterRef('pk'),
+            estudiante=estudiante,
+            puntuacion__isnull=False
+        )
+
         return Tarea.objects.filter(
             curso__estudiantes_inscritos__estudiante=estudiante
         ).select_related('curso').annotate(
-            esta_entregada=Exists(entregas)
+            esta_entregada=Exists(entregas),
+            esta_calificada=Exists(entregas_calificadas)
         ).order_by('Fecha_entrega').distinct()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['ahora'] = timezone.now()
         return context
+
 
 
 class DetalleTareaEstudianteView(LoginRequiredMixin, DetailView):
