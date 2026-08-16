@@ -35,7 +35,6 @@
       <!-- Columna Izquierda: Info y Formulario -->
       <div class="col-estudiante">
         <div class="info-estudiante">
-          <span class="avatar-placeholder">{{ entrega.estudiante.usuario.username|make_list|first|upper }}</span>
           <div class="datos-estudiante">
             <h3>{{ entrega.estudiante.usuario.get_full_name|default:entrega.estudiante.usuario.username }}</h3>
             <small>Entregado: {{ entrega.fecha_envio|date:"d M Y, h:i a" }}</small>
