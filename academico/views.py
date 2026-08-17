@@ -5,10 +5,11 @@ from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import EstudianteForm
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView, View
 
+from usuarios.forms import ComentarioForm
+from .forms import EstudianteForm
 
 from academico import models
 from academico.models import Curso, Inscripcion
@@ -23,14 +24,14 @@ class CursoListView(ListView):
     context_object_name = 'cursos'
 
 
-# detalles de los cursos como maestro
+# Detalles de los cursos como maestro
 class CursoDetailView(DetailView):
     model = Curso
     template_name = 'academi/curso_detail.html'
     context_object_name = 'curso'
 
 
-# creación de cursos como maestro
+# Creación de cursos como maestro
 class CursoCreateView(CreateView):
     model = Curso
     template_name = 'academi/curso_form.html'
@@ -61,7 +62,7 @@ class CursoDeleteView(DeleteView):
     success_url = reverse_lazy('curso_list')
 
 
-# lista de cursos para inscribirse como estudiante
+# Lista de cursos para inscribirse como estudiante
 class ListaCursoEstudianteView(ListView):
     model = Curso
     template_name = 'academi/listacursoEstudianteInscripcion.html'
@@ -121,6 +122,7 @@ class InscribirCursoView(View):
 
         return JsonResponse({'mensaje': mensaje, 'creada': creada})
 
+
 class tableroEstudianteView(LoginRequiredMixin, ListView):
     model = Tarea
     template_name = 'academi/tablero_estudiante.html'
@@ -154,7 +156,6 @@ class tableroEstudianteView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['ahora'] = timezone.now()
         return context
-
 
 
 class DetalleTareaEstudianteView(LoginRequiredMixin, DetailView):
@@ -195,6 +196,8 @@ class DetalleTareaEstudianteView(LoginRequiredMixin, DetailView):
             context['entrega'] = None
 
         context['ahora'] = timezone.now()
+        # Formulario de comentarios para el estudiante
+        context['form_comentario'] = ComentarioForm()
         return context
 
     def post(self, request, *args, **kwargs):
@@ -227,6 +230,7 @@ class DetalleTareaEstudianteView(LoginRequiredMixin, DetailView):
 
         return redirect('detalle_tarea_estudiante', pk=tarea_actual.pk)
 
+
 @login_required
 def configuracion_perfil(request):
     perfil = request.user.perfil_estudiante
@@ -235,12 +239,28 @@ def configuracion_perfil(request):
         form = EstudianteForm(request.POST, request.FILES, instance=perfil)
         
         if form.is_valid():
-            form.save() 
+            form.save()
             messages.success(request, "¡Tu perfil ha sido actualizado con éxito!")
-            return redirect('configuracion_perfil') 
+            return redirect('configuracion_perfil')
         else:
             messages.error(request, "Hubo un error al actualizar tu perfil. Por favor, revisa los datos ingresados.")    
     else:
         form = EstudianteForm(instance=perfil)
 
     return render(request, 'academi/settings_estudiante.html', {'form': form})
+
+
+def agregarComentario(request, entrega_id):
+    if request.method == 'POST':
+        entrega = get_object_or_404(Calificacion, id=entrega_id)
+        
+        form = ComentarioForm(request.POST)
+        if form.is_valid():
+            comentario = form.save(commit=False)
+            comentario.entrega = entrega
+            comentario.autor = request.user
+            comentario.save()
+            
+            return redirect(request.META.get('HTTP_REFERER', '/'))
+            
+    return redirect(request.META.get('HTTP_REFERER', '/'))

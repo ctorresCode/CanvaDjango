@@ -9,7 +9,6 @@
   <div class="tarea-cabecera">
     {% if ruta_archivo %}
     <h1 class="tarea-titulo-canvas">Detalles de la entrega</h1>
-
     {% if not puntuacion %}
     <p class="calificacion-texto">
       Calificación: - / {{ tarea.cantidad_puntos }}
@@ -20,9 +19,8 @@
     </p>
     {% endif %} {% else %}
     <h1 class="tarea-titulo-canvas">{{ tarea.titulo|upper }}</h1>
-
     {% if tarea.Fecha_entrega and tarea.Fecha_entrega < ahora %}
-    <p style="color: #d9534f; font-weight: 400; margin-top: 10px">
+    <p class="texto-alerta-fecha">
       El tiempo para entregar esta tarea ha terminado.
     </p>
     {% else %}
@@ -36,7 +34,6 @@
   <div class="tarea-entregada-detalles">
     <h2 class="entregada-titulo">{{ tarea.titulo }}</h2>
     <p class="entregada-subtitulo">
-      <!-- prettier-ignore -->
       {{ request.user.get_full_name|upper }} entregada el {{ entrega.fecha_envio }}
     </p>
 
@@ -47,14 +44,13 @@
         </div>
 
         {% for adjunto in entrega.archivos_adjuntos.all %}
-        <div class="archivo-item" style="margin-bottom: 10px">
+        <div class="archivo-item">
           <div class="archivo-info">
             <a
               href="{{ adjunto.archivo.url }}"
               target="_blank"
               class="link-archivo-azul"
             >
-              <!-- prettier-ignore -->
               {{ adjunto.archivo.name|slice:"28:"|default:"Archivo_entregado" }}
             </a>
             <span class="archivo-peso">
@@ -70,30 +66,47 @@
               target="_blank"
               class="link-archivo-azul"
             >
-              <!-- prettier-ignore -->
-              {{ entrega.ruta_archivo.name|slice:"21:"|default:"Mi_tarea_entregada.pdf" }}
+              {{entrega.ruta_archivo.name|slice:"21:"|default:"Mi_tarea_entregada.pdf"}}
             </a>
           </div>
         </div>
         {% else %}
         <p>No hay archivos adjuntos.</p>
         {% endif %} {% endfor %}
+      </div>
 
-        <div class="entregada-comentarios">
-          <strong class="comentario-label">Agregar un comentario:</strong>
-          <textarea class="textarea-comentario" placeholder=""></textarea>
-
-          <div class="comentario-enlaces">
-            <a href="#" class="link-opcion"></a>
-            <a href="#" class="link-opcion">📎 Adjuntar archivo</a>
+      <div class="entregada-comentarios">
+        {% if entrega.comentarios.all %}
+        <div class="historial-comentarios">
+          {% for comentario in entrega.comentarios.all %}
+          <div class="comentario-item">
+            <strong class="comentario-autor">
+              {{ comentario.autor.get_full_name|default:comentario.autor.email}}
+            </strong>
+            <p class="comentario-texto">{{ comentario.texto }}</p>
+            <small class="comentario-fecha"
+              >{{ comentario.fecha_envio|date:"d M, H:i" }}</small
+            >
           </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <form
+          method="POST"
+          action="{% url 'agregar_comentario' entrega.id %}"
+          class="formulario-comentarios"
+        >
+          {% csrf_token %}
+          <strong class="comentario-label">Agregar un comentario:</strong>
+
+          <div class="textarea-wrapper">{{ form_comentario.texto }}</div>
 
           <p class="comentario-helper">
-            Todos los comentarios se envían al grupo completo.
+            Todos los comentarios se envían al maestro.
           </p>
-
-          <button class="btn-guardar-comentario">Guardar</button>
-        </div>
+          <button type="submit" class="btn-guardar-comentario">Guardar</button>
+        </form>
       </div>
     </div>
   </div>
@@ -131,7 +144,7 @@
           download
           class="btn-descargar-canvas"
         >
-          <span style="font-size: 16px; margin-right: 5px"></span>
+          <span></span>
           Descargar Archivo Adjunto {{ forloop.counter }}
         </a>
       </li>
@@ -206,7 +219,7 @@
   {% endif %}
 
   <div class="back-container-canvas">
-    <hr class="canvas-hr" style="margin-bottom: 20px; margin-top: 20px" />
+    <hr class="canvas-hr hr-espaciado" />
     <a href="{% url 'tablero_estudiante' %}" class="btn-anterior-canvas">
       &#9664; Anterior
     </a>

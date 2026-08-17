@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone  
 from tinymce.models import HTMLField
 from academico.models import Curso
-from usuarios.models import Estudiante
+from usuarios.models import Estudiante, Usuario
 
 
 class Tarea(models.Model):
@@ -51,3 +51,15 @@ class ArchivoEntrega(models.Model):
 
     def __str__(self):
         return f"Adjunto de {self.entrega.estudiante.usuario.username} - {self.entrega.tarea.titulo}"
+
+class ComentarioEntrega(models.Model):
+    entrega = models.ForeignKey(Calificacion, on_delete=models.CASCADE, related_name='comentarios')
+    autor = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='comentarios_realizados')
+    texto = models.TextField(verbose_name='Comentario')
+    fecha_envio = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['fecha_envio']
+
+    def __str__(self):
+        return f"Comentario de {self.autor.email} en {self.entrega.tarea.titulo}"

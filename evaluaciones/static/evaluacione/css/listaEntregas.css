@@ -66,10 +66,6 @@
   padding: 16px;
 }
 
-.campo-grupo {
-  margin-bottom: 14px;
-}
-
 .campo-grupo label {
   display: block;
   font-size: 0.85rem;
@@ -78,30 +74,133 @@
   margin-bottom: 4px;
 }
 
-.campo-grupo input,
-.campo-grupo textarea {
-  width: 100%;
-  padding: 8px 10px;
+.puntuacion-wrapper {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+  margin-top: 8px;
+}
+
+.input-puntuacion {
+  width: 90px;
+  padding: 10px;
   border: 1px solid #d1d5db;
   border-radius: 6px;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  text-align: center;
   box-sizing: border-box;
 }
 
-.btn-guardar {
-  width: 100%;
+.input-puntuacion:focus {
+  outline: none;
+  border-color: #000000;
+}
+
+.btn-actualizar-nota {
+  flex: 1;
   background-color: #000000;
   color: #ffffff;
   border: none;
-  padding: 10px;
+  padding: 10px 16px;
   border-radius: 6px;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s ease;
+  font-size: 0.95rem;
 }
 
-.btn-guardar:hover {
+.btn-actualizar-nota:hover {
   background-color: #333333;
+}
+
+.chat-container {
+  margin-top: 24px;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 20px;
+}
+
+.chat-titulo {
+  margin-bottom: 16px;
+  color: #003366;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.historial-comentarios {
+  max-height: 280px;
+  overflow-y: auto;
+  margin-bottom: 16px;
+  padding-right: 12px;
+}
+
+.comentario-item {
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.comentario-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.comentario-autor {
+  font-size: 0.9rem;
+  color: #111827;
+  display: block;
+  font-weight: 600;
+}
+
+.comentario-texto {
+  margin: 6px 0;
+  font-size: 0.9rem;
+  color: #374151;
+  line-height: 1.4;
+}
+
+.comentario-fecha {
+  color: #6b7280;
+  font-size: 0.8rem;
+}
+
+.formulario-comentarios .textarea-wrapper {
+  margin-bottom: 12px;
+}
+
+.formulario-comentarios textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 12px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  resize: vertical;
+  min-height: 90px;
+}
+
+.formulario-comentarios textarea:focus {
+  outline: none;
+  border-color: #0073a8;
+  box-shadow: 0 0 0 2px rgba(0, 115, 168, 0.2);
+}
+
+.btn-enviar-retro {
+  width: 100%;
+  background-color: #0073a8;
+  color: #ffffff;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.btn-enviar-retro:hover {
+  background-color: #005c87;
 }
 
 .visor-wrapper {

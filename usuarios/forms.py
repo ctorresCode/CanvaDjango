@@ -1,7 +1,8 @@
 
-from django.contrib.admin import forms
+from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from usuarios.models import Usuario
+from evaluaciones.models import ComentarioEntrega
+from usuarios.models import Estudiante, Usuario
 
 
 class RegistrarUsuarioForm(UserCreationForm):
@@ -13,4 +14,17 @@ class RegistrarUsuarioForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.help_text = None   
+
+
+class ComentarioForm(forms.ModelForm):
+    class Meta:
+        model = ComentarioEntrega
+        fields = ['texto']
+        widgets = {
+            'texto': forms.Textarea(attrs={
+                'rows': 3, 
+                'placeholder': 'Agregar un comentario...'
+            }),
+        }
+
     

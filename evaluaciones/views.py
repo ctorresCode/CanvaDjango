@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 from evaluaciones.models import ArchivoTarea, Calificacion, Tarea
+from usuarios.forms import ComentarioForm
 
 class MultipleFileInput(forms.FileInput):
     def __init__(self, attrs=None):
@@ -123,6 +124,7 @@ def ListaEntregas(request, tarea_id):
     context = {
         'tarea': tarea,
         'entregas': entregas,
+        'form_comentario': ComentarioForm(),
     }        
 
     return render(request, 'evaluacione/listaEntregas.html', context)    
