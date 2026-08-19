@@ -1,0 +1,13 @@
+<div class="opciones-curso">
+  <a
+    href="{% url 'tablero_estudiante_curso' pk=curso.id %}"
+    class="{% if request.resolver_match.url_name == 'tablero_estudiante_curso' %}active{% endif %}"
+    >Página de Inicio</a
+  >
+  <a
+    href="{% url 'muestra_estudiantes_por_curso' curso_id=curso.id %}"
+    class="{% if request.resolver_match.url_name == 'muestra_estudiantes_por_curso' %}active{% endif %}"
+    >Personas</a
+  >
+  <a href="#" class="">Calificaciones</a>
+</div>

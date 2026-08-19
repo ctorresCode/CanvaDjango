@@ -1,0 +1,172 @@
+.curso-layout-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  min-height: calc(100vh - 40px);
+  gap: 3rem;
+  padding: 2rem 3rem;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.opciones-curso {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: sticky;
+  top: 2rem;
+  width: 220px;
+  flex-shrink: 0;
+}
+
+.opciones-curso a {
+  display: block;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #0e68b3;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.opciones-curso a:hover {
+  background-color: #e0f2fe;
+}
+
+.opciones-curso a.active {
+  background-color: #0284c7;
+  color: #ffffff;
+}
+
+.contenido-principal-curso {
+  flex: 0 0 650px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 650px;
+  margin: 0;
+}
+
+.header-seccion {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #e2e8f0;
+  width: 100%;
+}
+
+.titulo-curso {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #1f55ac;
+  margin: 0;
+}
+
+.badge-curso {
+  background-color: #e2e8f0;
+  color: #334155;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.3rem 0.75rem;
+  border-radius: 10px;
+}
+
+.estudiantes-lista-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.estudiante-fila {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0.85rem 1.25rem;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.estudiante-fila:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  background-color: #f8fafc;
+}
+
+.estudiante-info-principal {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.estudiante-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e0f2fe;
+}
+
+.estudiante-datos-texto {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.estudiante-nombre {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.estudiante-email {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.estudiante-info-secundaria {
+  display: flex;
+  align-items: center;
+}
+
+.estudiante-badge-edad {
+  font-size: 0.75rem;
+  background-color: #f1f5f9;
+  color: #475569;
+  padding: 0.3rem 0.65rem;
+  border-radius: 9999px;
+  display: inline-block;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.empty-state {
+  width: 100%;
+  text-align: center;
+  padding: 2.5rem;
+  color: #64748b;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  border: 1px dashed #cbd5e1;
+}

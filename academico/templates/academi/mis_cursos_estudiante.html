@@ -11,7 +11,10 @@
     </div>
     <div class="curso-list-Inscripcion-container">
       {% for curso in cursos %}
-      <a class="curso-link" href="#">
+      <a
+        class="curso-link"
+        href="{% url 'tablero_estudiante_curso' pk=curso.pk %}"
+      >
         <div class="curso-item">
           <div class="card-image-container">
             {% if curso.imagen %}

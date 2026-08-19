@@ -1,0 +1,53 @@
+.curso-layout-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  min-height: calc(100vh - 40px);
+  gap: 3rem;
+  padding: 2rem 3rem;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.opciones-curso {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: sticky;
+  top: 2rem;
+  width: 220px;
+  flex-shrink: 0;
+}
+
+.opciones-curso a {
+  display: block;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #0e68b3;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.opciones-curso a:hover {
+  background-color: #e0f2fe;
+}
+
+.opciones-curso a.active {
+  background-color: #0284c7;
+  color: #ffffff;
+}
+
+.contenido-principal-curso {
+  flex: 1;
+  width: 100%;
+}

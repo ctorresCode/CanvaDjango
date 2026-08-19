@@ -1,0 +1,12 @@
+{% extends 'baseEstudiantes.html' %} {% load static %} {% block extra_css %}
+<link
+  rel="stylesheet"
+  href="{% static 'academico/css/estudiante_presiona_curso_inscripcion.css' %}"
+/>
+{% endblock %} {% block content %}
+<div class="curso-layout-wrapper">
+  {% include 'academi/menu_curso.html' %}
+
+  <main class="contenido-principal-curso"></main>
+</div>
+{% endblock %}

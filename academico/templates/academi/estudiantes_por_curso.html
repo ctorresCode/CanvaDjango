@@ -1,0 +1,64 @@
+{% extends 'baseEstudiantes.html' %} 
+{% load static %} 
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'academico/css/estudiantes_por_curso.css' %}" />
+{% endblock %} 
+
+
+{% block content %}
+<div class="curso-layout-wrapper">
+  
+ {% include 'academi/menu_curso.html' %}
+
+  <main class="contenido-principal-curso">
+    <header class="header-seccion">
+      <h1 class="titulo-curso">Estudiantes inscritos</h1>
+      <span class="badge-curso">{{ curso.nombre }}</span>
+    </header>
+
+    <div class="estudiantes-lista-container">
+      {% for estudiante in estudiantes %}
+      <div class="estudiante-fila">
+        
+        <div class="estudiante-info-principal">
+          {% if estudiante.imagen_perfil %}
+            <img src="{{ estudiante.imagen_perfil.url }}" alt="{{ estudiante.usuario.get_full_name }}" class="estudiante-avatar" />
+          {% else %}
+            <img src="{% static 'academico/img/default_user.png' %}" alt="Sin imagen" class="estudiante-avatar" />
+          {% endif %}
+
+          <div class="estudiante-datos-texto">
+            <h2 class="estudiante-nombre">
+              {% if estudiante.usuario.first_name or estudiante.usuario.last_name %} 
+                {{ estudiante.usuario.first_name }} {{ estudiante.usuario.last_name }} 
+              {% else %} 
+                Estudiante 
+              {% endif %}
+            </h2>
+            <p class="estudiante-email">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              {{ estudiante.usuario.email }}
+            </p>
+          </div>
+        </div>
+
+        <div class="estudiante-info-secundaria">
+          <span class="estudiante-badge-edad">
+            <strong>Edad:</strong> {% if estudiante.edad %}{{ estudiante.edad }} años{% else %}N/A{% endif %}
+          </span>
+        </div>
+        
+      </div>
+      {% empty %}
+      <div class="empty-state">
+        <p>No hay estudiantes inscritos en este curso aún.</p>
+      </div>
+      {% endfor %}
+    </div>
+  </main>
+</div>
+{% endblock %}

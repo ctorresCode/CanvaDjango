@@ -264,3 +264,20 @@ def agregarComentario(request, entrega_id):
             return redirect(request.META.get('HTTP_REFERER', '/'))
             
     return redirect(request.META.get('HTTP_REFERER', '/'))
+
+class EstudiantePresionaCursoInscrito(LoginRequiredMixin, DetailView):
+    model = Curso
+    template_name = 'academi/estudiante_presiona_curso_inscripcion.html'
+    context_object_name = 'curso'
+
+
+def muestraEstudiantePorCurso(request, curso_id):
+    curso = get_object_or_404(Curso, id=curso_id)
+    
+    estudiantes = Estudiante.objects.filter(inscripciones__curso=curso)
+
+    context = {
+        'curso': curso,
+        'estudiantes': estudiantes
+    }
+    return render(request, 'academi/estudiantes_por_curso.html', context)
