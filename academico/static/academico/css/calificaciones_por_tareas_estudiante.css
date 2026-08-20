@@ -1,0 +1,204 @@
+.header-calificaciones {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e9ed;
+}
+
+.header-calificaciones h1 {
+  color: #0c3c60;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 0.2px;
+  font-weight: 400;
+}
+
+.btn-imprimir {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  background-color: #ffffff;
+  border: 1px solid #dcdfe6;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #333;
+  font-size: 13px;
+  font-weight: 500;
+  margin-left: 20px;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.btn-imprimir:hover {
+  background-color: #f5f6f8;
+  border-color: #c3c9d1;
+}
+
+.tabla-calificaciones {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+
+.tabla-calificaciones thead tr {
+  border-bottom: 2px solid #0e68b3;
+}
+
+.tabla-calificaciones th {
+  padding: 12px 10px;
+  color: #002b49;
+  font-size: 12.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  text-align: left;
+}
+
+.tabla-calificaciones th.th-centro {
+  text-align: center;
+}
+.tabla-calificaciones th.th-derecha {
+  text-align: right;
+}
+
+.tabla-calificaciones tbody tr {
+  border-bottom: 1px solid #eef2f5;
+  transition: background-color 0.15s ease;
+}
+
+.tabla-calificaciones tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+.tabla-calificaciones td {
+  padding: 16px 10px;
+  font-size: 14px;
+  color: #495057;
+  vertical-align: middle;
+}
+
+.celda-tarea .nombre-tarea {
+  color: #0077c8;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 14.5px;
+}
+
+.celda-tarea .nombre-tarea:hover {
+  text-decoration: underline;
+}
+
+.celda-tarea .curso-tarea {
+  color: #8a94a1;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.celda-centro {
+  text-align: center;
+}
+.celda-derecha {
+  text-align: right;
+  font-weight: 500;
+}
+
+.badge-estado {
+  display: inline-block;
+  border-radius: 12px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge-calificado {
+  color: #1c7c3f;
+  background-color: #e8f7ee;
+}
+.badge-entregado {
+  color: #0f7490;
+  background-color: #e5f6fa;
+}
+.badge-faltante {
+  color: #d9534f;
+  background-color: #fdeceb;
+  border: 1px solid #f4c7c5;
+}
+.badge-pendiente {
+  color: #a6790a;
+  background-color: #fff8e5;
+}
+
+.puntaje-valor {
+  font-weight: 700;
+  color: #1a2733;
+}
+
+.sin-calificaciones {
+  margin-top: 24px;
+  color: #8a94a1;
+  font-size: 14px;
+  text-align: center;
+  padding: 40px 0;
+}
+
+.curso-layout-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 2.5rem;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.opciones-curso {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: sticky;
+  top: 2rem;
+  width: 220px;
+  flex-shrink: 0;
+}
+
+.opciones-curso a {
+  display: block;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #0e68b3;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.opciones-curso a:hover {
+  background-color: #e0f2fe;
+}
+
+.opciones-curso a.active {
+  background-color: #0284c7;
+  color: #ffffff;
+}
+
+.contenido-principal-curso {
+  flex: 0 0 750px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 750px;
+  margin: 0;
+}

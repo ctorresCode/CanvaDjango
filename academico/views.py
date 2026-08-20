@@ -1,6 +1,6 @@
 from django.utils import timezone
 from django.contrib import messages
-from django.db.models import Exists, OuterRef
+from django.db.models import Exists, OuterRef, Prefetch
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
@@ -270,6 +270,11 @@ class EstudiantePresionaCursoInscrito(LoginRequiredMixin, DetailView):
     template_name = 'academi/estudiante_presiona_curso_inscripcion.html'
     context_object_name = 'curso'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['estudiante'] = Estudiante.objects.get(usuario=self.request.user)
+        return context
+
 
 def muestraEstudiantePorCurso(request, curso_id):
     curso = get_object_or_404(Curso, id=curso_id)
@@ -281,3 +286,28 @@ def muestraEstudiantePorCurso(request, curso_id):
         'estudiantes': estudiantes
     }
     return render(request, 'academi/estudiantes_por_curso.html', context)
+
+
+@login_required
+def muestraCalificacionesPorTareasDelEstudiante(request, curso_id, id_estudiante):
+    curso = get_object_or_404(Curso, id=curso_id)
+    estudiante = get_object_or_404(Estudiante, pk=id_estudiante)
+
+    entregas_del_estudiante = Calificacion.objects.filter(estudiante=estudiante)
+
+    tareas = Tarea.objects.filter(curso=curso).prefetch_related(
+        Prefetch(
+            'entregas', 
+            queryset=entregas_del_estudiante,
+            to_attr='mi_entrega'
+        )
+    ).order_by('Fecha_entrega')
+
+    context = {
+        'curso': curso,
+        'estudiante': estudiante,
+        'tareas': tareas,
+        'ahora': timezone.now(), 
+    }
+
+    return render(request, 'academi/calificaciones_por_tareas_estudiante.html', context)    

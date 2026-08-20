@@ -9,5 +9,10 @@
     class="{% if request.resolver_match.url_name == 'muestra_estudiantes_por_curso' %}active{% endif %}"
     >Personas</a
   >
-  <a href="#" class="">Calificaciones</a>
+  <a
+    href="{% if estudiante_actual %}{% url 'muestra_calificaciones_por_tareas_estudiante' curso_id=curso.id id_estudiante=estudiante_actual.pk %}{% else %}#{% endif %}"
+    class="{% if request.resolver_match.url_name == 'muestra_calificaciones_por_tareas_estudiante' %}active{% endif %}"
+  >
+    Calificaciones
+  </a>
 </div>

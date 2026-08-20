@@ -1,6 +1,6 @@
 from django.urls import include, path
 
-from academico.views import CursoCreateView, CursoDeleteView, CursoDetailView, CursoListView, CursoUpdateView, DetalleTareaEstudianteView, EstudiantePresionaCursoInscrito, InscribirCursoView, ListaCursoEstudianteView, MisCursosEstudianteView, agregarComentario, muestraEstudiantePorCurso, tableroEstudianteView, configuracion_perfil
+from academico.views import CursoCreateView, CursoDeleteView, CursoDetailView, CursoListView, CursoUpdateView, DetalleTareaEstudianteView, EstudiantePresionaCursoInscrito, InscribirCursoView, ListaCursoEstudianteView, MisCursosEstudianteView, agregarComentario, muestraCalificacionesPorTareasDelEstudiante, muestraEstudiantePorCurso, tableroEstudianteView, configuracion_perfil
 
 urlpatterns = [
     path('panel-maestro/academico/', CursoListView.as_view(), name='curso_list'),
@@ -18,6 +18,7 @@ urlpatterns = [
     path('panel-estudiante/academico/tablero/', tableroEstudianteView.as_view(), name='tablero_estudiante'),
     path('panel-estudiante/academico/tablero/curso/<int:pk>/', EstudiantePresionaCursoInscrito.as_view(), name='tablero_estudiante_curso'),
     path('panel-estudiante/academico/tablero/curso/<int:curso_id>/personas/', muestraEstudiantePorCurso, name='muestra_estudiantes_por_curso'),
+    path('panel-estudiante/academico/tablero/curso/<int:curso_id>/calificaciones/<int:id_estudiante>/', muestraCalificacionesPorTareasDelEstudiante, name='muestra_calificaciones_por_tareas_estudiante'),
     path('panel-estudiante/academico/settings/', configuracion_perfil, name='configuracion_perfil'),
     path('panel-estudiante/academico/inscritos/', EstudiantePresionaCursoInscrito.as_view(), name='estudiante_presiona_curso_inscrito'),
 

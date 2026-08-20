@@ -1,0 +1,96 @@
+{% extends 'baseEstudiantes.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link
+  rel="stylesheet"
+  href="{% static 'academico/css/calificaciones_por_tareas_estudiante.css' %}"
+/>
+{% endblock %}
+
+{% block content %}
+<div class="curso-layout-wrapper">
+  {% include 'academi/menu_curso.html' %}
+
+  <main class="contenido-principal-curso">
+    <div class="header-calificaciones">
+      <h1>
+        Calificaciones para {{ estudiante.usuario.get_full_name|upper|default:estudiante.usuario.email|upper }}
+      </h1>
+      <button onclick="window.print()" class="btn-imprimir">
+        🖶 Imprimir calificaciones
+      </button>
+    </div>
+
+    {% if tareas %}
+    <table class="tabla-calificaciones">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Fecha de entrega</th>
+          <th>Entregado</th>
+          <th class="th-centro">Estado</th>
+          <th class="th-derecha">Puntaje</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for tarea in tareas %}
+          {% with entrega=tarea.mi_entrega|first %}
+          <tr>
+            <td class="celda-tarea">
+              <a href="{% url 'detalle_tarea_estudiante' pk=tarea.id %}" class="nombre-tarea">
+                {{ tarea.titulo }}
+              </a>
+              <div class="curso-tarea">
+                {{ curso.nombre }}
+              </div>
+            </td>
+
+            <td>
+              {% if tarea.Fecha_entrega %}
+                {{ tarea.Fecha_entrega|date:"j \d\e M \d\e Y \a \l\a\s H:i" }}
+              {% else %}
+                -
+              {% endif %}
+            </td>
+
+            <td>
+              {% if entrega %}
+                {{ entrega.fecha_envio|date:"j \d\e M \d\e Y" }}
+              {% else %}
+                -
+              {% endif %}
+            </td>
+
+            <td class="celda-centro">
+              {% if entrega and entrega.puntuacion is not None %}
+                <span class="badge-estado badge-calificado">Calificado</span>
+              {% elif entrega %}
+                <span class="badge-estado badge-entregado">Entregado</span>
+              {% elif tarea.Fecha_entrega and tarea.Fecha_entrega < ahora %}
+                <span class="badge-estado badge-faltante">Faltante</span>
+              {% else %}
+                <span class="badge-estado badge-pendiente">Pendiente</span>
+              {% endif %}
+            </td>
+
+            <td class="celda-derecha">
+              {% if entrega and entrega.puntuacion is not None %}
+                <span class="puntaje-valor">{{ entrega.puntuacion }}</span> / {{ tarea.cantidad_puntos }}
+              {% else %}
+                - / {{ tarea.cantidad_puntos }}
+              {% endif %}
+            </td>
+          </tr>
+          {% endwith %}
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p class="sin-calificaciones">
+      No hay tareas registradas en este curso todavía.
+    </p>
+    {% endif %}
+  </main>
+</div>
+{% endblock %}
