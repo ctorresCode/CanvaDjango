@@ -2,7 +2,8 @@
   border: 1px solid #ccc;
   background-color: #f9f9f9;
   margin-top: 20px;
-  width: 1400px;
+  width: 100%;
+  max-width: 1400px;
   padding: 20px;
   display: flex;
   flex-direction: column;
