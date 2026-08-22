@@ -1,14 +1,33 @@
-{%extends 'baseMaestros.html'%} {%load static%}{%block extra_css%}
+{% extends 'baseMaestros.html' %} {% load static %} {% block extra_css %}
 <link
   rel="stylesheet"
   type="text/css"
-  href="{% static 'css/curso_update.css' %}"
+  href="{% static 'academico/css/curso_update.css' %}"
 />
-{%endblock%} {%block content%}
-<h1>Editar materia</h1>
-<form method="post" class="django-form">
-  {% csrf_token %} {{ form.as_p }}
-  <button type="submit" class="btn-primary">Guardar cambios</button>
-  <a href="{% url 'curso_list'  %}">Volver</a>
-  {%endblock%}
-</form>
+{% endblock %} {% block content %}
+<div class="overlay-crear-curso">
+  <div class="modal-curso">
+    <div class="modal-cabecera">
+      <h2>Editar Materia</h2>
+      <a href="{% url 'curso_list' %}" class="btn-cerrar-modal" title="Cerrar"
+        >&times;</a
+      >
+    </div>
+
+    <div class="modal-cuerpo">
+      <form
+        method="post"
+        enctype="multipart/form-data"
+        class="formulario-estilizado"
+      >
+        {% csrf_token %} {{ form.as_p }}
+
+        <div class="modal-acciones">
+          <a href="{% url 'curso_list' %}" class="btn-secundario">Cancelar</a>
+          <button type="submit" class="btn-primario">Guardar Cambios</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

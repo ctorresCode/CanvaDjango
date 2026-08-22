@@ -13,7 +13,7 @@
 
 .badge-puntos {
   background: #eef2ff;
-  color: #3730a3;
+  color: #2a5bbc;
   padding: 8px 16px;
   border-radius: 8px;
   font-size: 0.95rem;
@@ -98,7 +98,7 @@
 
 .btn-actualizar-nota {
   flex: 1;
-  background-color: #000000;
+  background-color: #0f9813;
   color: #ffffff;
   border: none;
   padding: 10px 16px;
@@ -110,7 +110,7 @@
 }
 
 .btn-actualizar-nota:hover {
-  background-color: #333333;
+  background-color: #075b0a;
 }
 
 .chat-container {

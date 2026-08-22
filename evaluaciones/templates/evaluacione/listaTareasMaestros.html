@@ -1,79 +1,63 @@
-{% extends 'baseMaestros.html' %} {% load static %} {% block extra_css %}
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="{% static 'evaluacione/css/ListaTareas.css' %}"
-/>
-{% endblock %} {% block content %}
+{% extends 'baseMaestros.html' %} 
+{% load static %} 
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'evaluacione/css/ListaTareas.css' %}" />
+{% endblock %} 
+
+{% block content %}
 <div class="contenedor_tareas">
   <div class="titulo_crearTarea">
-    <h1 class="titulo_tareasActivas">
-      Tareas activas para la entrega de los estudiantes
-    </h1>
-    <button class="btn-primario" id="btnAbrirModal">+ Crear Nueva Tarea</button>
+    <h1 class="titulo_tareasActivas">Tareas activas para la entrega</h1>
+    <button class="btn-primario" id="btnAbrirModal">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
+      </svg>
+      Crear Nueva Tarea
+    </button>
   </div>
 
-  {% for tarea in tareas %}
-  <a href="{% url 'detalle_tarea' tarea.id %}" class="tarea-link">
-    <div class="tarea">
-      <h3 class="materia-nombre">{{tarea.curso}}</h3>
+  <div class="lista-grid">
+    {% for tarea in tareas %}
+    <div class="tarea-card">
+      <a href="{% url 'detalle_tarea' tarea.id %}" class="tarea-info-link">
+        <span class="materia-nombre">{{tarea.curso|upper}}</span>
+        <h3 class="tarea-titulo">{{tarea.titulo}}</h3>
+        <div class="tarea-meta">
+          <span class="tarea-fecha">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Entrega: {{tarea.Fecha_entrega}}
+          </span>
+          <span class="tarea-puntos">{{tarea.cantidad_puntos}} puntos</span>
+        </div>
+      </a>
 
-      <h4 class="tarea-titulo" style="cursor: pointer">{{tarea.titulo}}</h4>
-
-      <div class="tarea_puntos_fecha">
-        <p class="tarea-puntos">{{tarea.cantidad_puntos}} puntos</p>
-        <p class="tarea-fecha">Fecha de entrega: {{tarea.Fecha_entrega}}</p>
-      </div>
-
-      <div class="tarea-botones">
-        <a class="lista_de_entrega" href="{% url 'lista_entregas' tarea.id %}">Lista de entrega</a>
-        <a
-          href="{% url 'editar_tarea' tarea.id %}"
-          class="edit-button"
-          title="Editar tarea"
-        >
-          <svg
-            width="20"
-            height="20"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-            ></path>
-          </svg>
-        </a>
-
-        <a
-          href="{% url 'eliminar_tarea' tarea.id %}"
-          class="delete-button btn-abrir-eliminar"
-          title="Eliminar tarea"
-        >
-          <svg
-            width="20"
-            height="20"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-            ></path>
-          </svg>
-        </a>
+      <div class="tarea-acciones-derecha">
+        <a class="btn-lista-entrega" href="{% url 'lista_entregas' tarea.id %}">Entregas</a>
+        
+        <div class="acciones-iconos">
+          <a href="{% url 'editar_tarea' tarea.id %}" class="btn-icono edit-button" title="Editar tarea">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"></path>
+            </svg>
+          </a>
+          
+          <a href="{% url 'eliminar_tarea' tarea.id %}" class="btn-icono delete-button btn-abrir-eliminar" title="Eliminar tarea">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"></path>
+            </svg>
+          </a>
+        </div>
       </div>
     </div>
-  </a>
-  {% endfor %}
+    {% empty %}
+    <div class="empty-state">
+      <p>No hay tareas activas en este momento.</p>
+    </div>
+    {% endfor %}
+  </div>
 
   <div id="modalCrearTarea" class="modal-overlay">
     <div class="modal-contenido">
@@ -81,16 +65,12 @@
         <h2>Crear Tarea</h2>
         <button id="btnCerrarModal" class="btn-cerrar">&times;</button>
       </div>
-      <form
-        method="POST"
-        action="{% url 'crear_tarea' %}"
-        enctype="multipart/form-data"
-      >
-        {% csrf_token %} {{ form.as_p }} {{ form.media }}
+      <form method="POST" action="{% url 'crear_tarea' %}" enctype="multipart/form-data" class="formulario-estilizado">
+        {% csrf_token %} 
+        {{ form.as_p }} 
+        {{ form.media }}
         <div class="modal-acciones">
-          <button type="button" id="btnCancelar" class="btn-secundario">
-            Cancelar
-          </button>
+          <button type="button" id="btnCancelar" class="btn-secundario">Cancelar</button>
           <button type="submit" class="btn-primario">Guardar Tarea</button>
         </div>
       </form>
@@ -102,22 +82,13 @@
     <div class="modal-contenido">
       <div class="modal-cabecera">
         <h2>Editar Tarea</h2>
-        <a
-          href="{% url 'lista_de_tareas' %}"
-          class="btn-cerrar"
-          style="text-decoration: none"
-          >&times;</a
-        >
+        <a href="{% url 'lista_de_tareas' %}" class="btn-cerrar" style="text-decoration: none">&times;</a>
       </div>
-      <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %} {{ form.as_p }}
+      <form method="POST" enctype="multipart/form-data" class="formulario-estilizado">
+        {% csrf_token %} 
+        {{ form.as_p }}
         <div class="modal-acciones">
-          <a
-            href="{% url 'lista_de_tareas' %}"
-            class="btn-secundario"
-            style="text-decoration: none"
-            >Cancelar</a
-          >
+          <a href="{% url 'lista_de_tareas' %}" class="btn-secundario" style="text-decoration: none">Cancelar</a>
           <button type="submit" class="btn-primario">Guardar Cambios</button>
         </div>
       </form>
@@ -126,31 +97,20 @@
   {% endif %}
 
   <div id="modalEliminarTarea" class="modal-overlay">
-    <div class="modal-contenido" style="max-width: 400px">
-      <div class="modal-cabecera">
-        <h2>Eliminar Tarea</h2>
-        <button type="button" id="btnCerrarModalEliminar" class="btn-cerrar">
-          &times;
-        </button>
+    <div class="modal-contenido" style="max-width: 450px; text-align: center;">
+      <div class="modal-cabecera" style="justify-content: center; border: none;">
+        <h2 style="color: #dc2626;">Eliminar Tarea</h2>
       </div>
       <div style="margin-bottom: 25px">
-        <p style="color: #4b5563; font-size: 16px">
-          ¿Estás seguro que quieres eliminar esta tarea?
+        <p style="color: #4b5563; font-size: 16px; line-height: 1.5;">
+          ¿Estás seguro que quieres eliminar esta tarea? Esta acción no se puede deshacer.
         </p>
       </div>
       <form id="formEliminarTarea" method="POST" action="">
         {% csrf_token %}
-        <div class="modal-acciones">
-          <button type="button" id="btnCancelarEliminar" class="btn-secundario">
-            Cancelar
-          </button>
-          <button
-            type="submit"
-            class="btn-primario"
-            style="background-color: #dc2626; border-color: #dc2626"
-          >
-            Eliminar
-          </button>
+        <div class="modal-acciones" style="justify-content: center;">
+          <button type="button" id="btnCancelarEliminar" class="btn-secundario">Cancelar</button>
+          <button type="submit" class="btn-peligro">Eliminar</button>
         </div>
       </form>
     </div>
@@ -160,31 +120,20 @@
 {% if is_paginated %}
 <div class="paginacion-contenedor">
   <div class="paginacion-info">
-    Mostrando la <span>Página {{ page_obj.number }}</span> de
-    <span>{{ page_obj.paginator.num_pages }}</span>
+    Mostrando la <span>Página {{ page_obj.number }}</span> de <span>{{ page_obj.paginator.num_pages }}</span>
   </div>
-
   <div class="paginacion-controles">
     {% if page_obj.has_previous %}
-    <a href="?page=1" class="paginacion-btn" title="Primera página"
-      >&laquo; Primera</a
-    >
-    <a href="?page={{ page_obj.previous_page_number }}" class="paginacion-btn"
-      >Anterior</a
-    >
+    <a href="?page=1" class="paginacion-btn">&laquo; Primera</a>
+    <a href="?page={{ page_obj.previous_page_number }}" class="paginacion-btn">Anterior</a>
     {% else %}
     <span class="paginacion-btn btn-desactivado">&laquo; Primera</span>
     <span class="paginacion-btn btn-desactivado">Anterior</span>
-    {% endif %} {% if page_obj.has_next %}
-    <a href="?page={{ page_obj.next_page_number }}" class="paginacion-btn"
-      >Siguiente</a
-    >
-    <a
-      href="?page={{ page_obj.paginator.num_pages }}"
-      class="paginacion-btn"
-      title="Última página"
-      >Última &raquo;</a
-    >
+    {% endif %} 
+    
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}" class="paginacion-btn">Siguiente</a>
+    <a href="?page={{ page_obj.paginator.num_pages }}" class="paginacion-btn">Última &raquo;</a>
     {% else %}
     <span class="paginacion-btn btn-desactivado">Siguiente</span>
     <span class="paginacion-btn btn-desactivado">Última &raquo;</span>
@@ -199,19 +148,21 @@
   const btnCerrarCrear = document.getElementById("btnCerrarModal");
   const btnCancelarCrear = document.getElementById("btnCancelar");
 
-  btnAbrirCrear.addEventListener("click", () =>
-    modalCrear.classList.add("activo"),
-  );
-  btnCerrarCrear.addEventListener("click", () =>
-    modalCrear.classList.remove("activo"),
-  );
-  btnCancelarCrear.addEventListener("click", () =>
-    modalCrear.classList.remove("activo"),
-  );
+  if(btnAbrirCrear) {
+    btnAbrirCrear.addEventListener("click", () => modalCrear.classList.add("activo"));
+  }
+  if(btnCerrarCrear) {
+    btnCerrarCrear.addEventListener("click", () => modalCrear.classList.remove("activo"));
+  }
+  if(btnCancelarCrear) {
+    btnCancelarCrear.addEventListener("click", () => modalCrear.classList.remove("activo"));
+  }
 
-  modalCrear.addEventListener("click", (e) => {
-    if (e.target === modalCrear) modalCrear.classList.remove("activo");
-  });
+  if(modalCrear) {
+    modalCrear.addEventListener("click", (e) => {
+      if (e.target === modalCrear) modalCrear.classList.remove("activo");
+    });
+  }
 
   const modalEditar = document.getElementById("modalEditarTarea");
 
@@ -232,8 +183,9 @@
       }, 300);
     };
 
-    btnCerrarEditar.addEventListener("click", cerrarConAnimacion);
-    btnCancelarEditar.addEventListener("click", cerrarConAnimacion);
+    if(btnCerrarEditar) btnCerrarEditar.addEventListener("click", cerrarConAnimacion);
+    if(btnCancelarEditar) btnCancelarEditar.addEventListener("click", cerrarConAnimacion);
+    
     modalEditar.addEventListener("click", (e) => {
       if (e.target === modalEditar) {
         e.preventDefault();
@@ -260,15 +212,17 @@
     });
   });
 
-  btnCerrarEliminar.addEventListener("click", () =>
-    modalEliminar.classList.remove("activo"),
-  );
-  btnCancelarEliminar.addEventListener("click", () =>
-    modalEliminar.classList.remove("activo"),
-  );
+  if(btnCerrarEliminar) {
+    btnCerrarEliminar.addEventListener("click", () => modalEliminar.classList.remove("activo"));
+  }
+  if(btnCancelarEliminar) {
+    btnCancelarEliminar.addEventListener("click", () => modalEliminar.classList.remove("activo"));
+  }
 
-  modalEliminar.addEventListener("click", (e) => {
-    if (e.target === modalEliminar) modalEliminar.classList.remove("activo");
-  });
+  if(modalEliminar) {
+    modalEliminar.addEventListener("click", (e) => {
+      if (e.target === modalEliminar) modalEliminar.classList.remove("activo");
+    });
+  }
 </script>
 {% endblock %}

@@ -1,7 +1,48 @@
-{% extends 'baseMaestros.html' %}{%load static%} {% block content %}
-<h1>Detalles de la materia</h1>
-<p><strong>Nombre:</strong> {{ curso.nombre }}</p>
-<p><strong>Descripción:</strong> {{ curso.descripcion }}</p>
-<p><strong>Maestro:</strong> {{ curso.maestro }}</p>
-<a href="{% url 'curso_list'  %}" class="btn-primary">Volver atrás</a>
+{% extends 'baseMaestros.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'academico/css/curso_detail.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="detalle-contenedor">
+  <div class="detalle-tarjeta">
+    
+    <div class="detalle-cabecera">
+      <h2>Detalles de la Materia</h2>
+      <span class="badge-estado">Activa</span>
+      <a href="{% url 'curso_list' %}" class="btn-cerrar-detalle" title="Cerrar">&times;</a>
+    </div>
+
+    <div class="detalle-cuerpo">
+      <div class="info-grupo">
+        <span class="info-label">Nombre del Curso</span>
+        <h3 class="info-valor destacado">{{ curso.nombre|upper }}</h3>
+      </div>
+
+      <div class="info-grupo">
+        <span class="info-label">Descripción</span>
+        <p class="info-valor">{{ curso.descripcion }}</p>
+      </div>
+
+      <div class="info-grupo">
+        <span class="info-label">Maestro Asignado</span>
+        <p class="info-valor maestro-nombre">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"></path>
+          </svg>
+          {{ curso.maestro }}
+        </p>
+      </div>
+    </div>
+
+    <div class="detalle-acciones">
+      <a href="{% url 'curso_list' %}" class="btn-volver">
+        Cerrar Detalles
+      </a>
+    </div>
+
+  </div>
+</div>
 {% endblock %}
